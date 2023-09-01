@@ -161,9 +161,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/idc/Vendor_1915_Product_4d81.idc:$(TARGET_COPY_OUT_VENDOR)/usr/idc/Vendor_1915_Product_4d81.idc \
     $(LOCAL_PATH)/configs/idc/Vendor_1915_Product_eaea.idc:$(TARGET_COPY_OUT_VENDOR)/usr/idc/Vendor_1915_Product_eaea.idc
 
-# Kernel Binary
-KERNEL_PREBUILT_DIR := device/xiaomi/liuqin-kernel
-
 # Keymaster
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.keystore.app_attest_key.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.keystore.app_attest_key.xml
@@ -210,6 +207,14 @@ PRODUCT_COPY_FILES += \
 # Peripheral Manager
 PRODUCT_PACKAGES += \
     XiaomiPeripheralManager
+
+# Power
+PRODUCT_PACKAGES += \
+    android.hardware.power@1.0 \
+    android.hardware.power@1.1 \
+    android.hardware.power@1.2 \
+    android.hardware.power@1.3 \
+
 
 # QMI
 PRODUCT_PACKAGES += \
