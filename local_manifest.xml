@@ -13,12 +13,10 @@
   <!-- Common Xiaomi sepolicy (from AOSPA, generic; works with LOS) -->
   <project name="android_device_xiaomi_sepolicy" path="device/xiaomi/sepolicy" remote="aospa" />
 
-  <!-- QCOM wlan tree (provides libwifi-hal-qcom for qca6490 / wcn6740) -->
-  <project name="LineageOS/android_hardware_qcom_wlan" path="hardware/qcom/wlan" remote="lineage" />
-
-  <!-- hardware/xiaomi is provided by either LineageOS upstream or another
-       local manifest. If you don't already have it, add this snippet to a
-       separate local manifest:
+  <!-- hardware/xiaomi and hardware/qcom/wlan are provided by either
+       LineageOS upstream or another local manifest. If they aren't
+       already in your tree, add this to a separate local manifest:
          <remote name="lineage" fetch="https://github.com/LineageOS/" revision="lineage-23.2" />
-         <project name="LineageOS/android_hardware_xiaomi" path="hardware/xiaomi" remote="lineage" /> -->
+         <project name="LineageOS/android_hardware_xiaomi" path="hardware/xiaomi" remote="lineage" />
+         <project name="LineageOS/android_hardware_qcom_wlan" path="hardware/qcom/wlan" remote="lineage" /> -->
 </manifest>
