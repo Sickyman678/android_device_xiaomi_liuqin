@@ -194,13 +194,10 @@ PRODUCT_PACKAGES += \
 # Overlays
 PRODUCT_PACKAGES += \
     LiuqinFrameworks \
-    LiuqinFrameworksAOSPA \
     LiuqinLauncher3 \
     LiuqinSettings \
     LiuqinSettingsProvider \
-    LiuqinSetupWizardAOSPA \
-    LiuqinSystemUI \
-    LiuqinSystemUIAOSPA
+    LiuqinSystemUI
 
 # Parts
 PRODUCT_PACKAGES += \

@@ -74,7 +74,7 @@ BOARD_BOOTCONFIG := \
 
 BOARD_KERNEL_CMDLINE := \
     disable_dma32=on \
-    mtdoops.fingerprint=$(AOSPA_VERSION) \
+    mtdoops.fingerprint=$(LINEAGE_VERSION) \
     video=vfb:640x400,bpp=32,memsize=3072000
 
 BOARD_KERNEL_PAGESIZE := 4096
