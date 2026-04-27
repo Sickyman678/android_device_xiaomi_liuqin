@@ -4,13 +4,17 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
+DEVICE_PATH := device/xiaomi/liuqin
+
+# Security patch level (must be set before the sm8450-common include,
+# which errors out if VENDOR_SECURITY_PATCH is empty)
+VENDOR_SECURITY_PATCH := 2026-04-01
+
 # Inherit from xiaomi sm8450-common
 include device/xiaomi/sm8450-common/BoardConfigCommon.mk
 
 # Inherit from the proprietary version
 -include vendor/xiaomi/liuqin/BoardConfigVendor.mk
-
-DEVICE_PATH := device/xiaomi/liuqin
 
 # Bypass the kernel's per-device GKI fragment (no liuqin_GKI.config in
 # upstream LineageOS kernel/xiaomi/sm8450 yet).
@@ -45,9 +49,6 @@ TARGET_RECOVERY_OVERSCAN_PERCENT := 1
 
 # Screen
 TARGET_SCREEN_DENSITY := 340
-
-# Security patch level (must be set; sm8450-common errors otherwise)
-VENDOR_SECURITY_PATCH := 2026-04-01
 
 # Sepolicy (liuqin-specific on top of sm8450-common)
 BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
