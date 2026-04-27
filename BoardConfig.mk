@@ -82,7 +82,7 @@ BOARD_USES_GENERIC_KERNEL_IMAGE := true
 TARGET_HAS_GENERIC_KERNEL_HEADERS := true
 
 # Lineage Health
-TARGET_HEALTH_CHARGING_CONTROL_SUPPORTS_BYPASS := false
+$(call soong_config_set,lineage_health,charging_control_supports_bypass,false)
 
 # Metadata
 BOARD_USES_METADATA_PARTITION := true
