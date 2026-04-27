@@ -7,7 +7,7 @@
   <!-- Device, vendor, and kernel trees -->
   <project name="android_device_xiaomi_liuqin" path="device/xiaomi/liuqin" remote="lossantospro" />
   <project name="android_vendor_xiaomi_liuqin" path="vendor/xiaomi/liuqin" remote="xiaomi-sm8475" />
-  <project name="android_device_xiaomi_liuqin-kernel" path="device/xiaomi/liuqin-kernel" remote="xiaomi-sm8475" />
+  <project name="android_device_xiaomi_liuqin-kernel" path="device/xiaomi/liuqin-kernel" remote="lossantospro" revision="vauxite" />
 
   <!-- Common Xiaomi sepolicy (from AOSPA, generic; works with LOS) -->
   <project name="android_device_xiaomi_sepolicy" path="device/xiaomi/sepolicy" remote="aospa" />
