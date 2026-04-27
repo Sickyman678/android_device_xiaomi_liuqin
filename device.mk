@@ -22,6 +22,7 @@ $(call inherit-product, vendor/xiaomi/liuqin/liuqin-vendor.mk)
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH) \
+    hardware/qcom/wlan \
     hardware/xiaomi
 
 # AAPT
