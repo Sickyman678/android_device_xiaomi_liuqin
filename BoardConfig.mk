@@ -1,105 +1,29 @@
 #
-# Copyright (C) 2023 Paranoid Android
-#
+# SPDX-FileCopyrightText: 2023 Paranoid Android
+# SPDX-FileCopyrightText: The LineageOS Project
 # SPDX-License-Identifier: Apache-2.0
 #
 
+# Inherit from xiaomi sm8450-common
+include device/xiaomi/sm8450-common/BoardConfigCommon.mk
+
+# Inherit from the proprietary version
+-include vendor/xiaomi/liuqin/BoardConfigVendor.mk
+
 DEVICE_PATH := device/xiaomi/liuqin
-HARDWARE_PATH := hardware/xiaomi
 
-# A/B
-AB_OTA_UPDATER := true
+# Bypass the kernel's per-device GKI fragment (no liuqin_GKI.config in
+# upstream LineageOS kernel/xiaomi/sm8450 yet).
+TARGET_KERNEL_CONFIG := \
+    gki_defconfig \
+    vendor/waipio_GKI.config \
+    vendor/xiaomi_GKI.config \
+    vendor/debugfs.config
 
-AB_OTA_PARTITIONS += \
-    boot \
-    dtbo \
-    odm \
-    product \
-    recovery \
-    system \
-    system_ext \
-    vbmeta \
-    vbmeta_system \
-    vendor \
-    vendor_boot \
-    vendor_dlkm
+# VINTF (liuqin-specific Xiaomi HAL declarations, on top of sm8450-common)
+DEVICE_MANIFEST_FILE += $(DEVICE_PATH)/configs/vintf/manifest_xiaomi.xml
 
-# Architecture
-TARGET_ARCH := arm64
-TARGET_ARCH_VARIANT := armv8-2a-dotprod
-TARGET_CPU_ABI := arm64-v8a
-TARGET_CPU_VARIANT := cortex-a76
-
-# Boot
-BOARD_BOOT_HEADER_VERSION := 4
-BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
-BOARD_RAMDISK_USE_LZ4 := true
-
-# Boot control
-SOONG_CONFIG_NAMESPACES += ufsbsg
-SOONG_CONFIG_ufsbsg += ufsframework
-SOONG_CONFIG_ufsbsg_ufsframework := bsg
-
-# Bootloader
-TARGET_BOOTLOADER_BOARD_NAME := taro
-
-# Build
-BUILD_BROKEN_DUP_RULES := true
-BUILD_BROKEN_DUP_SYSPROP := true
-BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
-
-# Display
-TARGET_SCREEN_DENSITY := 340
-
-SOONG_CONFIG_NAMESPACES += dolby_vision
-SOONG_CONFIG_dolby_vision += enabled
-SOONG_CONFIG_dolby_vision_enabled := true
-
-# DTB
-BOARD_INCLUDE_DTB_IN_BOOTIMG := true
-
-# HIDL
-DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += \
-    $(HARDWARE_PATH)/vintf/xiaomi_framework_compatibility_matrix.xml
-
-DEVICE_MANIFEST_FILE += \
-    $(DEVICE_PATH)/configs/vintf/manifest_cape.xml \
-    $(DEVICE_PATH)/configs/vintf/manifest_xiaomi.xml
-
-# Kernel
-BOARD_BOOTCONFIG := \
-    androidboot.hardware=qcom \
-    androidboot.memcg=1 \
-    androidboot.usbcontroller=a600000.dwc3
-
-BOARD_KERNEL_CMDLINE := \
-    disable_dma32=on \
-    mtdoops.fingerprint=$(LINEAGE_VERSION) \
-    video=vfb:640x400,bpp=32,memsize=3072000
-
-BOARD_KERNEL_PAGESIZE := 4096
-BOARD_USES_GENERIC_KERNEL_IMAGE := true
-TARGET_HAS_GENERIC_KERNEL_HEADERS := true
-
-# Lineage Health
-$(call soong_config_set,lineage_health,charging_control_supports_bypass,false)
-
-# Metadata
-BOARD_USES_METADATA_PARTITION := true
-
-# Partitions
-BOARD_BOOTIMAGE_PARTITION_SIZE := 201326592
-BOARD_DTBOIMG_PARTITION_SIZE := 25165824
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 104857600
-BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE := 100663296
-
-BOARD_SUPER_PARTITION_SIZE := 9126805504
-BOARD_SUPER_PARTITION_GROUPS := qti_dynamic_partitions
-BOARD_QTI_DYNAMIC_PARTITIONS_PARTITION_LIST := odm product system system_ext vendor vendor_dlkm
-BOARD_QTI_DYNAMIC_PARTITIONS_SIZE := 9122611200
-
-BOARD_FLASH_BLOCK_SIZE := 262144
-
+# Filesystem types - Pad 6 Pro ships with erofs, override sm8450-common's ext4
 BOARD_ODMIMAGE_FILE_SYSTEM_TYPE := erofs
 BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := erofs
 BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := erofs
@@ -107,13 +31,7 @@ BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE := erofs
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := erofs
 BOARD_VENDOR_DLKMIMAGE_FILE_SYSTEM_TYPE := erofs
 
-TARGET_COPY_OUT_ODM := odm
-TARGET_COPY_OUT_PRODUCT := product
-TARGET_COPY_OUT_SYSTEM_EXT := system_ext
-TARGET_COPY_OUT_VENDOR := vendor
-TARGET_COPY_OUT_VENDOR_DLKM := vendor_dlkm
-
-# Power
+# Power feature ext lib
 TARGET_POWER_FEATURE_EXT_LIB := //$(DEVICE_PATH):libpowerfeature_ext_liuqin
 
 # Properties
@@ -121,51 +39,17 @@ TARGET_ODM_PROP += $(DEVICE_PATH)/configs/properties/odm.prop
 TARGET_PRODUCT_PROP += $(DEVICE_PATH)/configs/properties/product.prop
 TARGET_VENDOR_PROP += $(DEVICE_PATH)/configs/properties/vendor.prop
 
-# Recovery
-BOARD_EXCLUDE_KERNEL_FROM_RECOVERY_IMAGE := true
+# Recovery (tablet portrait-default)
 TARGET_RECOVERY_DEFAULT_ROTATION := ROTATION_RIGHT
-TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/init/fstab.qcom
 TARGET_RECOVERY_OVERSCAN_PERCENT := 1
-TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
-TARGET_USERIMAGES_USE_F2FS := true
 
-# SELinux
-include device/xiaomi/sepolicy/SEPolicy.mk
+# Screen
+TARGET_SCREEN_DENSITY := 340
+
+# Security patch level (must be set; sm8450-common errors otherwise)
+VENDOR_SECURITY_PATCH := 2026-04-01
+
+# Sepolicy (liuqin-specific on top of sm8450-common)
 BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
 SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/private
 SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/public
-
-# Verified Boot
-BOARD_AVB_ENABLE := true
-BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 3
-
-BOARD_AVB_RECOVERY_ALGORITHM := SHA256_RSA4096
-BOARD_AVB_RECOVERY_KEY_PATH := external/avb/test/data/testkey_rsa4096.pem
-BOARD_AVB_RECOVERY_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
-BOARD_AVB_RECOVERY_ROLLBACK_INDEX_LOCATION := 1
-
-BOARD_AVB_VBMETA_SYSTEM := product system system_ext
-BOARD_AVB_VBMETA_SYSTEM_ALGORITHM := SHA256_RSA4096
-BOARD_AVB_VBMETA_SYSTEM_KEY_PATH := external/avb/test/data/testkey_rsa4096.pem
-BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
-BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX_LOCATION := 2
-
-# WiFi
-BOARD_WLAN_DEVICE := qcwcn
-BOARD_WLAN_CHIP := wcn6740
-BOARD_HOSTAPD_DRIVER := NL80211
-BOARD_HOSTAPD_PRIVATE_LIB := //hardware/qcom/wlan/wcn6740/qcwcn/wpa_supplicant_8_lib:lib_driver_cmd_$(BOARD_WLAN_DEVICE)
-BOARD_WPA_SUPPLICANT_DRIVER := NL80211
-BOARD_WPA_SUPPLICANT_PRIVATE_LIB := //hardware/qcom/wlan/wcn6740/qcwcn/wpa_supplicant_8_lib:lib_driver_cmd_$(BOARD_WLAN_DEVICE)
-QC_WIFI_HIDL_FEATURE_DUAL_AP := true
-QC_WIFI_HIDL_FEATURE_DUAL_STA := true
-WIFI_DRIVER_BUILT := qca_cld3
-WIFI_DRIVER_DEFAULT := qca_cld3
-WIFI_DRIVER_STATE_CTRL_PARAM := "/dev/wlan"
-WIFI_DRIVER_STATE_OFF := "OFF"
-WIFI_DRIVER_STATE_ON := "ON"
-WIFI_HIDL_FEATURE_AWARE := true
-WIFI_HIDL_FEATURE_DUAL_INTERFACE := true
-WPA_SUPPLICANT_VERSION := VER_0_8_X
-
-$(call soong_config_set,qcom_wifi,board_wlan_chip,wcn6740)

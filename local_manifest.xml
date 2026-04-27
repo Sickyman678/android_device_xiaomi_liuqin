@@ -1,22 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Liuqin local manifest. Pulls the device tree itself plus the
+  TheMuppets blobs for sm8450-common. Everything else (sm8450-common
+  device tree, kernel, kernel modules, devicetrees, hardware/xiaomi)
+  is auto-pulled via lineage.dependencies when you run `breakfast`.
+
+  After copying this to .repo/local_manifests/liuqin.xml, run:
+
+      breakfast lineage_liuqin
+
+  to let roomservice resolve transitive deps, then `repo sync -j8`.
+-->
 <manifest>
   <remote name="lossantospro" fetch="https://github.com/LosSantosPro/" revision="lineage-23.2" />
-  <remote name="xiaomi-sm8475" fetch="https://github.com/Xiaomi-SM8475/" revision="vauxite" />
-  <remote name="aospa" fetch="https://github.com/AOSPA/" revision="vauxite" />
-  <remote name="lineage" fetch="https://github.com/LineageOS/" revision="lineage-23.2" />
+  <remote name="muppets" fetch="https://github.com/TheMuppets/" revision="lineage-23.2" />
 
-  <!-- Device, vendor, and kernel trees -->
+  <!-- Liuqin device tree -->
   <project name="android_device_xiaomi_liuqin" path="device/xiaomi/liuqin" remote="lossantospro" />
-  <project name="android_vendor_xiaomi_liuqin" path="vendor/xiaomi/liuqin" remote="lossantospro" revision="vauxite" />
-  <project name="android_device_xiaomi_liuqin-kernel" path="device/xiaomi/liuqin-kernel" remote="lossantospro" revision="vauxite" />
 
-  <!-- Common Xiaomi sepolicy (from AOSPA, generic; works with LOS) -->
-  <project name="android_device_xiaomi_sepolicy" path="device/xiaomi/sepolicy" remote="aospa" />
+  <!-- Common Xiaomi sm8450 vendor blobs from TheMuppets (LineageOS official). -->
+  <project name="proprietary_vendor_xiaomi_sm8450-common" path="vendor/xiaomi/sm8450-common" remote="muppets" />
 
-  <!-- hardware/xiaomi and hardware/qcom/wlan are provided by either
-       LineageOS upstream or another local manifest. If they aren't
-       already in your tree, add this to a separate local manifest:
-         <remote name="lineage" fetch="https://github.com/LineageOS/" revision="lineage-23.2" />
-         <project name="LineageOS/android_hardware_xiaomi" path="hardware/xiaomi" remote="lineage" />
-         <project name="LineageOS/android_hardware_qcom_wlan" path="hardware/qcom/wlan" remote="lineage" /> -->
+  <!-- vendor/xiaomi/liuqin (device-specific blobs: touch fw, panel cal,
+       stylus, etc.) is NOT pulled here because TheMuppets does not yet
+       publish a liuqin blob repo. To get full hardware functionality you
+       need to extract from a stock Xiaomi Pad 6 Pro firmware dump:
+
+           cd device/xiaomi/liuqin
+           ./extract-files.py <path-to-stock-dump>
+
+       Without it the build still completes - just missing some
+       liuqin-specific hardware features. -->
 </manifest>
