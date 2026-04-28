@@ -21,14 +21,8 @@
   <!-- Common Xiaomi sm8450 vendor blobs from TheMuppets (LineageOS official). -->
   <project name="proprietary_vendor_xiaomi_sm8450-common" path="vendor/xiaomi/sm8450-common" remote="muppets" />
 
-  <!-- vendor/xiaomi/liuqin (device-specific blobs: touch fw, panel cal,
-       stylus, etc.) is NOT pulled here because TheMuppets does not yet
-       publish a liuqin blob repo. To get full hardware functionality you
-       need to extract from a stock Xiaomi Pad 6 Pro firmware dump:
-
-           cd device/xiaomi/liuqin
-           ./extract-files.py <path-to-stock-dump>
-
-       Without it the build still completes - just missing some
-       liuqin-specific hardware features. -->
+  <!-- Liuqin-specific vendor blobs (touch firmware, panel calibration,
+       stylus, Adreno a730 firmware, Dolby Vision codecs, camera tuning).
+       Extracted from stock OS3.0.5.0.VMYCNXM (Android 15, CN). -->
+  <project name="proprietary_vendor_xiaomi_liuqin" path="vendor/xiaomi/liuqin" remote="lossantospro" />
 </manifest>

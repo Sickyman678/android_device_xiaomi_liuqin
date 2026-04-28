@@ -17,12 +17,10 @@ from extract_utils.main import (
     ExtractUtilsModule,
 )
 
-namespace_imports = [
-    'vendor/qcom/common/system/telephony',
-    'vendor/qcom/common/vendor/adreno-s',
-    'vendor/qcom/common/vendor/display/5.10',
-    'vendor/qcom/common/vendor/media/5.10',
-]
+# sm8450-common's vendor blobs cover the bulk of the QCOM HAL surface;
+# the slim liuqin vendor repo doesn't need to import any extra
+# soong namespaces.
+namespace_imports = []
 
 
 def lib_fixup_liuqin_suffix(lib: str, partition: str, *args, **kwargs):

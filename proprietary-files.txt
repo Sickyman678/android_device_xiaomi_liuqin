@@ -1,33 +1,17 @@
 # Device proprietary files - from Xiaomi Pad 6 Pro MIUI OS2.0.212.0.VMYCNXM package, unless pinned
 
 # Adreno Firmware
-vendor/firmware/a730_sqe.fw
 vendor/firmware/a730_zap.b00
 vendor/firmware/a730_zap.b01
 vendor/firmware/a730_zap.b02
 vendor/firmware/a730_zap.elf
 vendor/firmware/a730_zap.mbn
 vendor/firmware/a730_zap.mdt
-vendor/firmware/gmu_gen70000.bin
 
 # ADSP
-vendor/bin/adsprpcd
-vendor/bin/cdsprpcd
-vendor/bin/dspservice
 vendor/bin/loadalgo
-vendor/etc/init/vendor.qti.adsprpc-guestos-service.rc
-vendor/etc/init/vendor.qti.cdsprpc-service.rc
-vendor/etc/init/vendor.qti.hardware.dsp@1.0-service.rc
-vendor/etc/seccomp_policy/vendor.qti.hardware.dsp.policy
-vendor/lib64/libadsp_default_listener.so
-vendor/lib64/libadsprpc.so
-vendor/lib64/libcdsp_default_listener.so
-vendor/lib64/libcdsprpc.so
 vendor/lib64/libloadalgo_stub.so
-vendor/lib64/libmdsprpc.so
-vendor/lib64/libsdsprpc.so
 vendor/lib64/libsysmon_cdsp_skel.so
-vendor/lib64/vendor.qti.hardware.dsp@1.0.so
 
 # ADSP (Modules)
 vendor/lib/rfsa/adsp/bm2n00.bin
@@ -118,21 +102,15 @@ vendor/lib64/hw/audio.primary.taro.so;MODULE_SUFFIX=_liuqin;OVERRIDES=audio.prim
 vendor/lib64/hw/gyro_fusion_interface.so
 vendor/lib64/hw/sound_trigger.primary.taro.so
 vendor/lib64/lib_misound_asc.so
-vendor/lib64/libadm.so
 vendor/lib64/libar-acdb.so
 vendor/lib64/libar-gpr.so
 vendor/lib64/libar-gsl.so
 vendor/lib64/libar-pal.so
 vendor/lib64/libats.so
-vendor/lib64/libaudio_log_utils.so
 vendor/lib64/libaudiocloudctrl.so
 vendor/lib64/libaudioroute_ext.so
 vendor/lib64/libbatterylistener.so
-vendor/lib64/libcapiv2svacnnvendor.so
-vendor/lib64/libcapiv2svarnnvendor.so
-vendor/lib64/libcapiv2uvvendor.so
 vendor/lib64/libcrussp.so
-vendor/lib64/libdsd2pcm.so
 vendor/lib64/libeai_fixed.so
 vendor/lib64/libeai_float.so
 vendor/lib64/libfmpal.so
@@ -140,10 +118,7 @@ vendor/lib64/libkaraokepal.so
 vendor/lib64/liblistensoundmodel2vendor.so
 vendor/lib64/liblx-ar_util.so
 vendor/lib64/liblx-osal.so
-vendor/lib64/libmcs.so
-vendor/lib64/libmisight.so
 vendor/lib64/libpalclient.so
-vendor/lib64/libqtigefar.so
 vendor/lib64/libresampler.so
 vendor/lib64/libxlog.so
 vendor/lib64/vendor.qti.hardware.ListenSoundModel@1.0-impl.so
@@ -205,9 +180,6 @@ vendor/etc/microphone_characteristics.xml
 vendor/etc/usecaseKvManager.xml
 
 # Audio (EAI Models)
-vendor/etc/models/acd/event.eai
-vendor/etc/models/acd/music.eai
-vendor/etc/models/acd/speech.eai
 
 # Audio (Firmware)
 vendor/firmware/BL-cs35l41-dsp1-spk-cali.bin
@@ -230,7 +202,6 @@ vendor/firmware/cs35l41-dsp1-spk-cali.wmfw
 vendor/firmware/cs35l41-dsp1-spk-prot.wmfw
 
 # Audio (FX Modules)
-vendor/lib64/soundfx/libasphere.so
 vendor/lib64/soundfx/libaudiopreprocessing.so
 vendor/lib64/soundfx/libbundlewrapper.so
 vendor/lib64/soundfx/libdownmix.so
@@ -244,27 +215,12 @@ vendor/lib64/soundfx/libswdap.so
 vendor/lib64/soundfx/libvisualizer.so
 
 # Bluetooth
-vendor/bin/hw/android.hardware.bluetooth@1.0-service-qti
-vendor/etc/init/android.hardware.bluetooth@1.0-service-qti.rc
-vendor/lib64/hw/android.hardware.bluetooth@1.0-impl-qti.so
 vendor/lib64/hw/audio.bluetooth_qti.default.so
-vendor/lib64/hw/com.dsi.ant@1.0-impl.so
-vendor/lib64/hw/vendor.qti.hardware.bluetooth_audio@2.0-impl.so
-vendor/lib64/hw/vendor.qti.hardware.bluetooth_audio@2.1-impl.so
-vendor/lib64/hw/vendor.qti.hardware.bluetooth_sar@1.1-impl.so
-vendor/lib64/hw/vendor.qti.hardware.btconfigstore@1.0-impl.so
-vendor/lib64/hw/vendor.qti.hardware.btconfigstore@2.0-impl.so
-vendor/lib64/btaudio_offload_if.so
 vendor/lib64/lib_bt_aptx.so
 vendor/lib64/lib_bt_ble.so
 vendor/lib64/lib_bt_bundle.so
 vendor/lib64/lib_bt_lhdc.so
-vendor/lib64/libbluetooth_audio_session_qti.so
-vendor/lib64/libbluetooth_audio_session_qti_2_1.so
 vendor/lib64/libbt-hidlclient.so
-vendor/lib64/libbtnv.so
-vendor/lib64/vendor.qti.hardware.bluetooth_sar@1.0.so
-vendor/lib64/vendor.qti.hardware.bluetooth_sar@1.1.so
 
 # Camera
 vendor/bin/hw/vendor.qti.camera.provider@2.7-service_64
@@ -758,13 +714,8 @@ vendor/lib64/hw/vendor.xiaomi.hardware.micharge@1.0-impl.so
 vendor/lib64/vendor.xiaomi.hardware.micharge@1.0.so
 
 # Configstore
-vendor/bin/hw/vendor.qti.hardware.capabilityconfigstore@1.0-service
-vendor/etc/init/vendor.qti.hardware.capabilityconfigstore@1.0-service.rc
-vendor/lib64/hw/vendor.qti.hardware.capabilityconfigstore@1.0-impl.so
 
 # CVP
-vendor/lib64/libcvp2_1.so
-vendor/lib64/libcvpcpuRev_skel.so
 
 # CVP (Firmware)
 vendor/firmware/evass-lt-21.b00
@@ -822,8 +773,6 @@ vendor/firmware/evautil64.b07
 vendor/firmware/evautil64.mdt
 
 # Display
-vendor/lib64/libhdrdynamic.so
-vendor/lib64/libhdrdynamicootf.so
 vendor/lib64/libsdmextension.so;MODULE_SUFFIX=_liuqin;OVERRIDES=libsdmextension
 
 # Display (Calibration)
@@ -831,81 +780,29 @@ vendor/etc/display/qdcm_calib_data_xiaomi_m81_36_02_0a_dualdsi_dsc_lcd_video_pan
 vendor/etc/display/qdcm_calib_data_xiaomi_m81_42_02_0b_dualdsi_dsc_lcd_video_panel.json
 
 # DPM
-vendor/bin/dpmQmiMgr
-vendor/bin/vendor.dpmd
-vendor/etc/dpm_vndr/vendor.dpm.conf
-vendor/etc/init/dpmQmiMgr.rc
-vendor/etc/init/vendor.dpmd.rc
 vendor/lib64/com.qualcomm.qti.dpm.api@1.0.so
-vendor/lib64/libdpmqmihal.so
-vendor/lib64/vendor.libdpmctmgr.so
-vendor/lib64/vendor.libdpmfdmgr.so
-vendor/lib64/vendor.libdpmframework.so
-vendor/lib64/vendor.libdpmtcm.so
 vendor/lib64/vendor.qti.hardware.dpmservice@1.0.so
 vendor/lib64/vendor.qti.hardware.dpmservice@1.1.so
 
 # DRM
-vendor/bin/hw/vendor.qti.hardware.qseecom@1.0-service
-vendor/bin/qseecomd
-vendor/etc/init/qseecomd.rc
-vendor/etc/init/vendor.qti.hardware.qseecom@1.0-service.rc
-vendor/etc/gpfspath_oem_config.xml
-vendor/lib64/hw/vendor.qti.hardware.qseecom@1.0-impl.so
-vendor/lib64/libGPreqcancel.so
-vendor/lib64/libGPreqcancel_svc.so
-vendor/lib64/libQSEEComAPI.so
-vendor/lib64/libcpion.so
-vendor/lib64/libdrmfs.so
-vendor/lib64/libdrmtime.so
-vendor/lib64/libops.so
-vendor/lib64/libqisl.so
-vendor/lib64/librpmb.so
-vendor/lib64/libspl.so
-vendor/lib64/libssd.so
 vendor/lib64/libtzdrmgenprov.so
-vendor/lib64/vendor.qti.hardware.qseecom@1.0.so
 
 # DRM (Widevine)
-vendor/bin/hw/android.hardware.drm@1.4-service.widevine
-vendor/etc/init/android.hardware.drm@1.4-service.widevine.rc
-vendor/etc/vintf/manifest/manifest_android.hardware.drm@1.4-service.widevine.xml
-vendor/lib64/mediadrm/libwvdrmengine.so
 vendor/lib64/libbase64.so
-vendor/lib64/libminkdescriptor.so
-vendor/lib64/liboemcrypto.so
-vendor/lib64/libtrustedapploader.so
-vendor/lib64/libwvhidl.so
 
 # EVA
-vendor/etc/eva/facedetection/model3.dat
-vendor/lib64/libeva.so
-vendor/lib64/libeva_util.so
 
 # Fingerprint
 vendor/lib64/hw/fingerprint.fpc.so:vendor/lib64/hw/fingerprint.fpc.default.so;FIX_SONAME
 
 # Gatekeeper
-vendor/bin/hw/android.hardware.gatekeeper@1.0-service-qti
-vendor/etc/init/android.hardware.gatekeeper@1.0-service-qti.rc
-vendor/lib64/hw/android.hardware.gatekeeper@1.0-impl-qti.so
 
 # GNSS
 vendor/lib64/libgps.utils.so
-vendor/lib64/libloc_base_util.so
-vendor/lib64/libloc_mq_client.so
-vendor/lib64/libpal_net_if.so
 
 # Hotword Enrollment - from Realme Pad Pro 5G (V816.0.1.0.UFSINXM)
-product/priv-app/HotwordEnrollmentOKGoogleHEXAGON_WIDEBAND/HotwordEnrollmentOKGoogleHEXAGON_WIDEBAND.apk|1f9eb653ab838483ca643976bd9d7aca02755bf5
-product/priv-app/HotwordEnrollmentXGoogleHEXAGON_WIDEBAND/HotwordEnrollmentXGoogleHEXAGON_WIDEBAND.apk|5c08b6e509409c149557c1e9895af9304df87fc5
-system_ext/etc/permissions/com.android.hotwordenrollment.common.util.xml|99cfd80965c170f4885a7dd62c0eaad1a0c7840f
-system_ext/framework/com.android.hotwordenrollment.common.util.jar|b768584073c6348713ffd0139d44039c9efc775a
 
 # HubUI - from Google Pixel Tablet (TQ3A.230605.009.A1)
-product/etc/appcompat/compat_framework_overrides.xml|3170cd414d4d6d3a4a9ad518c5f9137afb3da453
-product/etc/permissions/com.google.assistant.hubui.xml|954bd557c143ce8840386e849102aca834386ceb
-product/priv-app/SmartDisplayPrebuilt/SmartDisplayPrebuilt.apk;PRESIGNED|4a768228115d97e6b23c7927619bf1b959c74b96
 
 # Identity
 vendor/bin/hw/android.hardware.identity-service-qti
@@ -916,35 +813,23 @@ vendor/lib64/libqtiidentitycredential.so
 # Keymaster
 vendor/bin/hw/android.hardware.keymaster@4.0-service-qti
 vendor/bin/hw/android.hardware.keymaster@4.0-strongbox-service-qti
-vendor/bin/hw/android.hardware.keymaster@4.1-service-qti
-vendor/etc/init/android.hardware.keymaster@4.1-service-qti.rc
-vendor/lib64/libkeymasterdeviceutils.so
-vendor/lib64/libkeymasterprovision.so
-vendor/lib64/libkeymasterutils.so
-vendor/lib64/libqtikeymaster4.so
-vendor/lib64/libspcom.so
 
 # Keymint
-vendor/bin/hw/android.hardware.security.keymint-service-qti
-vendor/etc/init/android.hardware.security.keymint-service-qti.rc
 vendor/etc/vintf/manifest/android.hardware.security.keymint-service-qti-rkp.xml
-vendor/lib64/libqcbor.so
-vendor/lib64/libqtikeymint.so
 
 # Media - from Xiaomi Pad 6 Max (OS2.0.4.0.VMYCNXM)
-vendor/lib64/libqcodec2_base.so;MODULE_SUFFIX=_liuqin;OVERRIDES=libqcodec2_base|9f92947357240d1a4f333469259c993cc71b396c
-vendor/lib64/libqcodec2_basecodec.so;MODULE_SUFFIX=_liuqin;OVERRIDES=libqcodec2_basecodec|b7e88a7975e9a39faaf8d6755950e4ab70f8386a
-vendor/lib64/libqcodec2_core.so;MODULE_SUFFIX=_liuqin;OVERRIDES=libqcodec2_core|9900bede4f5de78ff5ac73fa34cb40cc7996d34c
-vendor/lib64/libqcodec2_filterbase.so;MODULE_SUFFIX=_liuqin;OVERRIDES=libqcodec2_filterbase|45b2453d2ec982043170d85c8d337fe3fd804628
-vendor/lib64/libqcodec2_hooks.so;MODULE_SUFFIX=_liuqin;OVERRIDES=libqcodec2_hooks|cd4e580a6f51632c9064d0235d279c9d710ecb71
-vendor/lib64/libqcodec2_mockfilter.so;MODULE_SUFFIX=_liuqin;OVERRIDES=libqcodec2_mockfilter|c40dad7c10c2c41f6e3531d7f6965ceb205fb89b
-vendor/lib64/libqcodec2_mockqc2filter.so;MODULE_SUFFIX=_liuqin;OVERRIDES=libqcodec2_mockqc2filter|6a39027507cb26d82216cfe6efb9d211d49c7f49
-vendor/lib64/libqcodec2_platform.so;MODULE_SUFFIX=_liuqin;OVERRIDES=libqcodec2_platform|f84f11aebfb3a01b97d0d0278c1bfb838b269794
-vendor/lib64/libqcodec2_utils.so;MODULE_SUFFIX=_liuqin;OVERRIDES=libqcodec2_utils|45f5a3fe9dee0f145c4e32a82e86cf7c285bf5fd
-vendor/lib64/libqcodec2_v4l2codec.so;MODULE_SUFFIX=_liuqin;OVERRIDES=libqcodec2_v4l2codec|e470f398ab57cdc5cf71b7c64302529e358be50c
+vendor/lib64/libqcodec2_base.so;MODULE_SUFFIX=_liuqin;OVERRIDES=libqcodec2_base
+vendor/lib64/libqcodec2_basecodec.so;MODULE_SUFFIX=_liuqin;OVERRIDES=libqcodec2_basecodec
+vendor/lib64/libqcodec2_core.so;MODULE_SUFFIX=_liuqin;OVERRIDES=libqcodec2_core
+vendor/lib64/libqcodec2_filterbase.so;MODULE_SUFFIX=_liuqin;OVERRIDES=libqcodec2_filterbase
+vendor/lib64/libqcodec2_hooks.so;MODULE_SUFFIX=_liuqin;OVERRIDES=libqcodec2_hooks
+vendor/lib64/libqcodec2_mockfilter.so;MODULE_SUFFIX=_liuqin;OVERRIDES=libqcodec2_mockfilter
+vendor/lib64/libqcodec2_mockqc2filter.so;MODULE_SUFFIX=_liuqin;OVERRIDES=libqcodec2_mockqc2filter
+vendor/lib64/libqcodec2_platform.so;MODULE_SUFFIX=_liuqin;OVERRIDES=libqcodec2_platform
+vendor/lib64/libqcodec2_utils.so;MODULE_SUFFIX=_liuqin;OVERRIDES=libqcodec2_utils
+vendor/lib64/libqcodec2_v4l2codec.so;MODULE_SUFFIX=_liuqin;OVERRIDES=libqcodec2_v4l2codec
 
 # Media (Configs)
-vendor/etc/media_cape/video_system_specs.json
 vendor/etc/media_codecs.xml
 vendor/etc/media_codecs_cape.xml
 vendor/etc/media_codecs_cape_vendor.xml
@@ -954,86 +839,59 @@ vendor/etc/media_codecs_system_default.xml
 vendor/etc/media_codecs_with_dolby_cape.xml
 vendor/etc/media_profiles.xml
 vendor/etc/media_profiles_V1_0.xml
-vendor/etc/media_profiles_cape.xml
 
 # Media (Dolby Audio) - from Xiaomi Pad 6 Max (OS2.0.4.0.VMYCNXM)
-vendor/bin/hw/vendor.dolby.hardware.dms@2.0-service|f2bdf53f4d9ccc269a0df097e4b0acc7f3badb89
-vendor/bin/hw/vendor.dolby.media.c2@1.0-service|e2afe22b6633f0b19fb39830c82c871cc0bc4d60
-vendor/etc/init/vendor.dolby.hardware.dms@2.0-service.rc|29296ebfe89b2697fec573be73cc3757fd97bed6
-vendor/etc/init/vendor.dolby.media.c2@1.0-service.rc|bc1e134139c7dd0e5b4f98952aa51c629ea66dc7
-vendor/etc/vintf/manifest/vendor.dolby.hardware.dms.xml|c8095f649de19b80271fb429b4b6b439297a0678
-vendor/lib64/soundfx/libdlbvol.so|1ebd52ecc1a42e1ec0eb785e541b08d191bf9924
-vendor/lib64/soundfx/libhwdap.so|1058720b5930196370e1e792a14e60e16c9a46e1
-vendor/lib64/soundfx/libswgamedap.so|cac12e23c860270775986d56c8f9b8f58ac07be3
-vendor/lib64/soundfx/libswvqe.so|bcfc527b34066600c4b747cced45ab8012e4c1a5
-vendor/lib64/libcodec2_soft_ac4dec.so|3f7da3e48b391f94e3e4aedbbea514eb5f4283ed
-vendor/lib64/libcodec2_soft_ddpdec.so|55275a7abcfde2d3f44fc48f9dd7a976fb98ebc1
-vendor/lib64/libcodec2_store_dolby.so|d0a85979f9c622cc5ad4071635271fe51c9ecb55
-vendor/lib64/libdapparamstorage.so|6dd6cf3bd92710cdba1cb981b52e64dca2407bd1
-vendor/lib64/libdeccfg.so|8ef3036d0b7a5f2caae277e21b5cf5174b2f085f
-vendor/lib64/libdlbdsservice.so|d4f9aa59644b1f90b221f188fc25a0b54db84c39
-vendor/lib64/libdlbpreg.so|e1588ec15d1b328c037ffd2f80c426dcd90d6467
-vendor/lib64/vendor.dolby.hardware.dms@2.0-impl.so|63db226e3f51448c094ef00ec9a92be089050219
-vendor/lib64/vendor.dolby.hardware.dms@2.0.so|e5c3409c9422297055cc79eff526e625be79ac32
+vendor/bin/hw/vendor.dolby.hardware.dms@2.0-service
+vendor/etc/init/vendor.dolby.hardware.dms@2.0-service.rc
+vendor/etc/init/vendor.dolby.media.c2@1.0-service.rc
+vendor/lib64/soundfx/libhwdap.so
+vendor/lib64/soundfx/libswgamedap.so
+vendor/lib64/soundfx/libswvqe.so
+vendor/lib64/libdapparamstorage.so
+vendor/lib64/libdeccfg.so
+vendor/lib64/libdlbdsservice.so
+vendor/lib64/vendor.dolby.hardware.dms@2.0-impl.so
+vendor/lib64/vendor.dolby.hardware.dms@2.0.so
 
 # Media (Dolby Vision)
 vendor/etc/dolby/dax-default.xml
 vendor/etc/dolby_vision.cfg
 
 # Media (Dolby Vision) - from Xiaomi Pad 6 Max (OS2.0.4.0.VMYCNXM)
-vendor/bin/hw/dolbycodec2|b9a20e1d958b0338ac946fca6b265c7477caf263
-vendor/etc/init/dolby_vision_codec2.rc|1ea8b363e94fd4f5410cadceb30de8229fb38045
-vendor/lib64/c2.dolby.avc.dec.so|439a00c49d07e4fa2451162f75ad1ec6dc5b1ede
-vendor/lib64/c2.dolby.avc.sec.dec.so|9dfdde23db39260bcba3a1d417dd07a5b521f411
-vendor/lib64/c2.dolby.client.so|afdeb2e9fa5d27088c3777bb315e9b959d6e9b5f
-vendor/lib64/c2.dolby.egl.so|11843f482039be68f002575585730f4369ac906c
-vendor/lib64/c2.dolby.hevc.dec.so|91f401898340cb8fe34ff9068023805947c6af84
-vendor/lib64/c2.dolby.hevc.enc.so|8e12f410be76ed42cdfd2cad132d6b42750d20a2
-vendor/lib64/c2.dolby.hevc.sec.dec.so|6cd4c320f53d65f89d35969851ddfd1e861d0bab
-vendor/lib64/c2.dolby.store.so|184bcadc12a2aee363d086490fdfb6c5271ac10e
-vendor/lib64/libdolbyottcameracontrol.so|8cd61fa1d09464710d570e66ee466567d6fb9060
-vendor/lib64/libdolbyvision.so|83c56a3c8c20d2ab04742f8ab82629a24a0e9774
+vendor/bin/hw/dolbycodec2
+vendor/lib64/c2.dolby.avc.dec.so
+vendor/lib64/c2.dolby.avc.sec.dec.so
+vendor/lib64/c2.dolby.client.so
+vendor/lib64/c2.dolby.egl.so
+vendor/lib64/c2.dolby.hevc.dec.so
+vendor/lib64/c2.dolby.hevc.enc.so
+vendor/lib64/c2.dolby.hevc.sec.dec.so
+vendor/lib64/c2.dolby.store.so
+vendor/lib64/libdolbyottcameracontrol.so
+vendor/lib64/libdolbyvision.so
 
 # Memory
-vendor/lib64/libvmmem.so
 
 # Mlipay
-vendor/bin/mlipayd@1.1
-vendor/etc/init/vendor.xiaomi.hardware.mlipay@1.1-service.rc
-vendor/etc/vintf/manifest/manifest_vendor.xiaomi.hardware.mlipay.xml
-vendor/lib64/libmlipay.so
-vendor/lib64/libmlipay@1.1.so
 vendor/lib64/vendor.xiaomi.hardware.mlipay@1.0.so;MODULE_SUFFIX=_vendor
 vendor/lib64/vendor.xiaomi.hardware.mlipay@1.1.so;MODULE_SUFFIX=_vendor
 vendor/lib64/vendor.xiaomi.hardware.mtdservice@1.0.so;MODULE_SUFFIX=_vendor
 
 # Native public libraries
-vendor/etc/public.libraries.txt
 
 # Neural Networks
 vendor/lib64/libQnnHtpAltPrepV69Stub.so
 
 # Perf
-vendor/etc/perf/perfboostsconfig.xml
 
 # Peripheral manager
-vendor/bin/pm-proxy
-vendor/lib64/libperipheral_client.so
 
 # PD
-vendor/bin/pd-mapper
-vendor/lib64/libpdmapper.so
-vendor/lib64/libpdnotifier.so
 
 # QCC
-vendor/lib64/hw/vendor.qti.hardware.qccvndhal@1.0-impl.so
-vendor/lib64/vendor.qti.hardware.qccvndhal@1.0-halimpl.so
 vendor/lib64/vendor.qti.hardware.qccvndhal@1.0.so
 
 # QCV
-vendor/bin/init.qti.qcv.sh
-vendor/etc/init/init.qti.qcv.rc
-vendor/lib64/libsoc_helper.so
 vendor/lib64/libsoc_helper_jni.so
 
 # QESDK
@@ -1051,74 +909,16 @@ vendor/lib64/vendor.qti.qesdhal@1.1.so
 vendor/lib64/vendor.qti.qesdsys-V1-ndk_platform.so
 
 # QMI
-vendor/bin/irsc_util
-vendor/bin/qmipriod
-vendor/etc/init/qmipriod.debug.rc
-vendor/etc/init/qmipriod.rc
-vendor/etc/seccomp_policy/qti-systemd.policy
-vendor/etc/sec_config
-vendor/lib64/libdiag.so
-vendor/lib64/libdsi_netctrl.so
-vendor/lib64/libdsutils.so
-vendor/lib64/libidl.so
-vendor/lib64/libmdmdetect.so
-vendor/lib64/libqcci_legacy.so
-vendor/lib64/libqcmaputils.so
-vendor/lib64/libqdi.so
-vendor/lib64/libqdp.so
-vendor/lib64/libqdpr.so
-vendor/lib64/libqmi.so
-vendor/lib64/libqmi_cci.so
-vendor/lib64/libqmi_client_helper.so
-vendor/lib64/libqmi_client_qmux.so
-vendor/lib64/libqmi_common_so.so
-vendor/lib64/libqmi_csi.so
 vendor/lib64/libqmi_csvt_srvc.so
-vendor/lib64/libqmi_encdec.so
-vendor/lib64/libqmi_legacy.so
 vendor/lib64/libqmiextservices.so
-vendor/lib64/libqmiservices.so
-vendor/lib64/libqrtr.so
 vendor/lib64/libsmemlog.so
 
 # QTEE
-vendor/bin/hw/vendor.qti.hardware.qteeconnector@1.0-service
-vendor/etc/init/vendor.qti.hardware.qteeconnector@1.0-service.rc
-vendor/lib64/hw/vendor.qti.hardware.qteeconnector@1.0-impl.so
-vendor/lib64/libGPQTEEC_vendor.so
-vendor/lib64/libGPTEE_vendor.so
-vendor/lib64/libQTEEConnector_listener.so
-vendor/lib64/libQTEEConnector_vendor.so
-vendor/lib64/vendor.qti.hardware.qteeconnector@1.0.so
 
 # Sensors
-vendor/bin/hw/vendor.qti.hardware.sensorscalibrate@1.0-service
-vendor/bin/init.qcom.sensors.sh
-vendor/bin/sensors.qti
-vendor/bin/sscrpcd
 vendor/etc/init/init.elliptic.rc
-vendor/etc/init/init.vendor.sensors.rc
-vendor/etc/init/vendor.qti.hardware.sensorscalibrate@1.0-service.rc
-vendor/etc/init/vendor.sensors.qti.rc
-vendor/etc/init/vendor.sensors.sscrpcd.rc
-vendor/etc/permissions/vendor-qti-hardware-sensorscalibrate.xml
-vendor/lib64/hw/vendor.qti.hardware.sensorscalibrate@1.0-impl.so
 vendor/lib64/libelliptic_engine.so
 vendor/lib64/libelliptic_serializer.so
-vendor/lib64/libsensorcal.so
-vendor/lib64/libsensorslog.so
-vendor/lib64/libsns_device_mode_stub.so
-vendor/lib64/libsns_direct_channel_stub.so
-vendor/lib64/libsns_registry_skel.so
-vendor/lib64/libsnsapi.so
-vendor/lib64/libsnsdiaglog.so
-vendor/lib64/libssc.so
-vendor/lib64/libssc_default_listener.so
-vendor/lib64/libultrasound_notify.so
-vendor/lib64/sensors.ssc.so
-vendor/lib64/sensors.touch.detect.so
-vendor/lib64/sensors.ultrasoundproximity.so
-vendor/lib64/vendor.qti.hardware.sensorscalibrate@1.0.so
 
 # Sensors (CIT)
 vendor/bin/hw/vendor.xiaomi.sensor.citsensorservice@2.0-service
@@ -1192,33 +992,15 @@ vendor/etc/sensors/sns_reg_config
 vendor/etc/sensor_diag.cfg
 
 # Snapdragon Computer Vision Engine
-vendor/lib64/libcv_common.so
-vendor/lib64/libfastcvdsp_stub.so
-vendor/lib64/libfastcvopt.so
-vendor/lib64/libscveCommon.so
-vendor/lib64/libscveCommon_stub.so
-vendor/lib64/libscveObjectSegmentation.so
-vendor/lib64/libscveObjectTracker.so
-vendor/lib64/libscveObjectTracker_stub.so
 
 # Soter
-vendor/bin/hw/vendor.qti.hardware.soter@1.0-service
-vendor/etc/init/vendor.qti.hardware.soter@1.0-service.rc
-vendor/lib64/hw/vendor.qti.hardware.soter@1.0-impl.so
-vendor/lib64/vendor.qti.hardware.soter@1.0.so
 
 # Soter (WeChat)
-vendor/app/SoterService/SoterService.apk
 
 # SSR
-vendor/bin/ssr_setup
 
 # Thermal
 vendor/bin/hw/vendor.qti.hardware.limits@1.1-service
-vendor/bin/mi_thermald
-vendor/bin/thermal-engine-v2
-vendor/etc/init/hw/init.mi_thermald.rc
-vendor/etc/init/init_thermal-engine-v2.rc
 vendor/etc/init/vendor.qti.hardware.limits-service.rc
 vendor/etc/vintf/manifest/vendor.qti.hardware.limits-service.xml
 vendor/etc/thermal-4k.conf
@@ -1241,15 +1023,10 @@ vendor/etc/thermal-video.conf
 vendor/etc/thermal-videochat.conf
 vendor/etc/thermal-yuanshen.conf
 vendor/etc/thermald-devices.conf
-vendor/lib64/libthermalclient.so
 vendor/lib64/vendor.qti.hardware.limits@1.0.so;MODULE_SUFFIX=_vendor
 vendor/lib64/vendor.qti.hardware.limits@1.1.so;MODULE_SUFFIX=_vendor
 
 # Time Services
-vendor/app/TimeService/TimeService.apk
-vendor/bin/time_daemon
-vendor/etc/init/init.time_daemon.rc
-vendor/lib64/libtime_genoff.so
 
 # Touch (Firmware)
 vendor/firmware/novatek_nt36532_m81_fw_csot.bin
@@ -1269,9 +1046,7 @@ vendor/lib64/vendor.xiaomi.hw.touchfeature@1.0.so;MODULE_SUFFIX=_vendor
 # Trusted User Interface
 vendor/bin/hw/vendor.qti.hardware.trustedui@1.0-service-qti
 vendor/bin/hw/vendor.qti.hardware.tui_comm@1.0-service-qti
-vendor/bin/ssgtzd
 vendor/bin/trusteduilistener
-vendor/etc/init/ssgtzd.rc
 vendor/etc/init/trusteduilistener.rc
 vendor/etc/init/vendor.qti.hardware.trustedui@1.0-service-qti.rc
 vendor/etc/init/vendor.qti.hardware.tui_comm@1.0-service-qti.rc
@@ -1282,30 +1057,16 @@ vendor/lib64/libTrustedInputUtils.so
 vendor/lib64/libTrustedUI.so
 vendor/lib64/libTrustedUITZ.so
 vendor/lib64/libTrustedUIVM.so
-vendor/lib64/libconfigdb.so
-vendor/lib64/libminksocket_vendor.so
-vendor/lib64/libnetmgr.so
-vendor/lib64/libnetmgrxfrmutils.so
 vendor/lib64/libsecureui_svcsock.so
 vendor/lib64/libsi.so
-vendor/lib64/libxml.so
 vendor/lib64/vendor.qti.hardware.trustedui@1.0.so
 vendor/lib64/vendor.qti.hardware.trustedui@1.1.so
 vendor/lib64/vendor.qti.hardware.trustedui@1.2.so
 vendor/lib64/vendor.qti.hardware.tui_comm@1.0.so
 
 # VPP
-vendor/bin/vppservice
-vendor/etc/configstore/vpp.configstore.xml
-vendor/etc/init/vppservice.rc
-vendor/etc/vintf/manifest/vendor.qti.hardware.vpp@2.0-service.xml
 vendor/lib64/libvppclient.so
-vendor/lib64/libvppcommon.so
-vendor/lib64/libvpphcp.so
-vendor/lib64/libvpphvx.so
 vendor/lib64/libvppimmotion.so
-vendor/lib64/libvpplibrary.so
-vendor/lib64/libvpptestutils.so
 
 # VPU (Firmware)
 vendor/firmware/vpu20_4v.b00
@@ -1325,7 +1086,6 @@ vendor/firmware/vpu20_4v.mdt
 
 # Wi-Fi
 vendor/bin/cnss-daemon;MODULE_SUFFIX=_liuqin;OVERRIDES=cnss-daemon
-vendor/bin/nv_mac
 
 # Wi-Fi (Configs)
 vendor/etc/wifi/qca6490/WCNSS_qcom_cfg.ini
@@ -1334,47 +1094,8 @@ vendor/etc/wifi/vendor_cmd.xml
 vendor/etc/wifi/wpa_supplicant_overlay.conf
 
 # Wi-Fi Display
-vendor/bin/wfdhdcphalservice
-vendor/bin/wfdvndservice
-vendor/bin/wifidisplayhalservice
-vendor/etc/init/android.hardware.drm@1.1-service.wfdhdcp.rc
-vendor/etc/init/com.qualcomm.qti.wifidisplayhal@1.0-service.rc
-vendor/etc/init/wfdvndservice.rc
-vendor/etc/seccomp_policy/wfdhdcphalservice.policy
-vendor/etc/seccomp_policy/wfdvndservice.policy
-vendor/etc/seccomp_policy/wifidisplayhalservice.policy
-vendor/etc/wfdconfig.xml
-vendor/lib64/libFileMux_proprietary.so
 vendor/lib64/libhdcp1prov.so
 vendor/lib64/libhdcp2p2prov.so
 vendor/lib64/libhdcpsrm.so
-vendor/lib64/liblowi_client.so
-vendor/lib64/liblowi_common.so
-vendor/lib64/liblowi_wifihal.so
 vendor/lib64/libmiracast.so
-vendor/lib64/libmmosal_vendor.so
-vendor/lib64/libmmrtpdecoder_vendor.so
-vendor/lib64/libmmrtpencoder_vendor.so
-vendor/lib64/libwfdcodecv4l2_proprietary.so
-vendor/lib64/libwfdcommonutils_proprietary.so
-vendor/lib64/libwfdconfigutils_proprietary.so
-vendor/lib64/libwfddisplayconfig_vendor.so
-vendor/lib64/libwfdhdcpcp.so
-vendor/lib64/libwfdhdcpservice_proprietary.so
-vendor/lib64/libwfdmminterface_proprietary.so
-vendor/lib64/libwfdmmservice_proprietary.so
-vendor/lib64/libwfdmmsrc_proprietary.so
-vendor/lib64/libwfdmodulehdcpsession.so
-vendor/lib64/libwfdrtsp_vendor.so
-vendor/lib64/libwfdsessionmodule.so
-vendor/lib64/libwfdsourcesession_proprietary.so
-vendor/lib64/libwfdsourcesm_proprietary.so
-vendor/lib64/libwfduibcinterface_vendor.so
-vendor/lib64/libwfduibcsink_vendor.so
-vendor/lib64/libwfduibcsinkinterface_vendor.so
-vendor/lib64/libwfduibcsrc_vendor.so
-vendor/lib64/libwfduibcsrcinterface_vendor.so
-vendor/lib64/libwfdutils_proprietary.so
 vendor/lib64/vendor.qti.hardware.sigma_miracast@1.0.so
-vendor/lib64/vendor.qti.hardware.wifidisplaysession@1.0.so;MODULE_SUFFIX=_vendor
-vendor/lib64/vendor.qti.hardware.wifidisplaysessionl@1.0-halimpl.so
