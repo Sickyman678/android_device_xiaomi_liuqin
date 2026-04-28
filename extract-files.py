@@ -17,10 +17,14 @@ from extract_utils.main import (
     ExtractUtilsModule,
 )
 
-# sm8450-common's vendor blobs cover the bulk of the QCOM HAL surface;
-# the slim liuqin vendor repo doesn't need to import any extra
-# soong namespaces.
-namespace_imports = []
+# Namespaces the liuqin-specific vendor blobs need to see.
+namespace_imports = [
+    'hardware/qcom-caf/sm8450',
+    'hardware/qcom/wlan/wcn6740',
+    'hardware/xiaomi',
+    'vendor/qcom/opensource/commonsys-intf/display',
+    'vendor/xiaomi/sm8450-common',
+]
 
 
 def lib_fixup_liuqin_suffix(lib: str, partition: str, *args, **kwargs):
@@ -32,30 +36,10 @@ def lib_fixup_vendor_suffix(lib: str, partition: str, *args, **kwargs):
 
 lib_fixups: lib_fixups_user_type = {
     **lib_fixups,
-    (
-        'audio.primary.taro',
-        'libsdmextension',
-        'libqcodec2_base',
-        'libqcodec2_basecodec',
-        'libqcodec2_core',
-        'libqcodec2_filterbase',
-        'libqcodec2_hooks',
-        'libqcodec2_mockfilter',
-        'libqcodec2_mockqc2filter',
-        'libqcodec2_platform',
-        'libqcodec2_utils',
-        'libqcodec2_v4l2codec',
-    ): lib_fixup_liuqin_suffix,
-    (
-        'vendor.qti.hardware.limits@1.0',
-        'vendor.qti.hardware.limits@1.1',
-        'vendor.qti.hardware.ListenSoundModel@1.0',
-        'vendor.qti.hardware.wifidisplaysession@1.0',
-        'vendor.xiaomi.hardware.mlipay@1.0',
-        'vendor.xiaomi.hardware.mlipay@1.1',
-        'vendor.xiaomi.hardware.mtdservice@1.0',
-        'vendor.xiaomi.hw.touchfeature@1.0',
-    ): lib_fixup_vendor_suffix,
+    # All AOSPA's lib_fixup entries removed: every lib in those tuples is
+    # now source-built by LineageOS sm8450-common / hardware/xiaomi /
+    # audio-hal/st-hal-ar-legacy, and cc_prebuilt_library_shared cannot
+    # use overrides: to replace a source-built install at the same path.
 }
 
 
@@ -94,7 +78,7 @@ blob_fixups: blob_fixups_user_type = {
     (
         'vendor/lib64/c2.dolby.client.so',
     ): blob_fixup()
-        .add_needed('libcodec2_hidl_shim.so'),
+        .add_needed('libcodec2_shim.so'),
     (
         'vendor/lib64/libqcodec2_core.so',
     ): blob_fixup()
@@ -113,6 +97,27 @@ blob_fixups: blob_fixups_user_type = {
         .replace_needed(
             'libstagefright_foundation.so',
             'libstagefright_foundation-v33.so'
+        ),
+    # Rename pre-V8 AIDL '_ndk_platform' -> '_ndk' for blobs that reference
+    # old Keymint/Identity/display.config HAL libs.
+    (
+        'vendor/lib64/libqtiidentitycredential.so',
+        'vendor/bin/hw/android.hardware.identity-service-qti',
+    ): blob_fixup()
+        .replace_needed(
+            'android.hardware.identity-V3-ndk_platform.so',
+            'android.hardware.identity-V3-ndk.so'
+        )
+        .replace_needed(
+            'android.hardware.keymaster-V3-ndk_platform.so',
+            'android.hardware.keymaster-V3-ndk.so'
+        ),
+    (
+        'vendor/lib64/libcamximageformatutils.so',
+    ): blob_fixup()
+        .replace_needed(
+            'vendor.qti.hardware.display.config-V2-ndk_platform.so',
+            'vendor.qti.hardware.display.config-V2-ndk.so'
         ),
     (
         'vendor/lib64/hw/vendor.xiaomi.sensor.citsensorservice@2.0-impl.so',

@@ -96,9 +96,7 @@ vendor/lib/rfsa/adsp/misound_res_spk4ch.bin|91c6ff04a8da339df07b539833684d5aa6c6
 vendor/lib/rfsa/adsp/weak_refs.so|53e8c7ce2025d72bf9f878e68dd0f0489b0f4a4f
 
 # Audio
-vendor/etc/vintf/manifest/manifest_non_qmaa.xml|ca8933881af97d5050e71ca7a2ecce4333c210d4
 vendor/etc/vintf/manifest/manifest_non_qmaa_extn.xml|976d39efc9a627fa167bec59e39dabd3a04c2ca9
-vendor/lib64/hw/audio.primary.taro.so;MODULE_SUFFIX=_liuqin;OVERRIDES=audio.primary.taro|56644b954a3a40c045bdd4668109d5b967624af7|7839df2c0c232436f6f1538c8795c5876ac25884
 vendor/lib64/hw/gyro_fusion_interface.so|f641d0218448881849d0cbf4f5759a735227125a
 vendor/lib64/lib_misound_asc.so|542f403ffb06e44c8c6c7998b372d325364fbb20
 vendor/lib64/libaudiocloudctrl.so|f7fd4492a12ed3db6ee8ea8f9ea4d4189629c17d
@@ -110,8 +108,6 @@ vendor/lib64/libkaraokepal.so|9be3c6c4bbb06568ac63199699d17e42a62b8601
 vendor/lib64/liblistensoundmodel2vendor.so|5da2dd0c654427c1ad347de2212e0d25bfb4cf32
 vendor/lib64/libresampler.so|b38622335b7a883e06f4f48e0f8df33c179d034f
 vendor/lib64/libxlog.so|d0914183eb15708d151669b4f6c80f77b05936c5
-vendor/lib64/vendor.qti.hardware.ListenSoundModel@1.0-impl.so|4401f02ca14b99d9ceba4eb5cce0aaa5727fa96e
-vendor/lib64/vendor.qti.hardware.ListenSoundModel@1.0.so;MODULE_SUFFIX=_vendor|4c97303b874061c8da841b5e9a2ddb1e22937991
 
 # Audio (ACDB)
 vendor/etc/acdbdata/Forte/Forte_acdb_cal.acdb|d7c108c768cbd53574d3661a4180331cfa9acdb9
@@ -552,7 +548,7 @@ vendor/lib64/libcamxfdalgo.so|0ab114310d04d269ce754fd04c6a5347fd5d5c5a
 vendor/lib64/libcamxfdengine.so|9c36e2ac28f96091717ff20d22c7f044a946977a
 vendor/lib64/libcamxhwnodecontext.so|d7d35f60c7a462c6f950c23a725ffcb1174cfc80
 vendor/lib64/libcamxifestriping.so|b5511390b3fa45a55e010a73954bb06cac0b9509
-vendor/lib64/libcamximageformatutils.so|8de79d969c3b900c52f2c9fa13a6ed9fc745ccf2
+vendor/lib64/libcamximageformatutils.so|8de79d969c3b900c52f2c9fa13a6ed9fc745ccf2|3f7d958ef55e660385888947ba6b0e3db5a273c1
 vendor/lib64/libcamxqsatalgo.so|3aafe42cab96b161ba9e1dee06823747aea0e1f3
 vendor/lib64/libcamxsettingsmanager.so|9be0085fcf04a8d6c05086a64c7758adabfb398b
 vendor/lib64/libcamxstatscore.so|814ec8f5bba0e2ac499df9e40dc942ad2b5ea080
@@ -750,7 +746,6 @@ vendor/firmware/evautil64.b07|aa851a1d6503c6d0d6e47419aa880b71be0734ae
 vendor/firmware/evautil64.mdt|ae4fd86c79ca599c9c4d24ea55c87229638c9dac
 
 # Display
-vendor/lib64/libsdmextension.so;MODULE_SUFFIX=_liuqin;OVERRIDES=libsdmextension|ce39075c4eccb30e8d75ccec16e752823a438a17
 
 # Display (Calibration)
 vendor/etc/display/qdcm_calib_data_xiaomi_m81_36_02_0a_dualdsi_dsc_lcd_video_panel.json|a063fb82992cb40455e3404a01223295fec449b4
@@ -772,17 +767,16 @@ vendor/lib64/hw/fingerprint.fpc.so:vendor/lib64/hw/fingerprint.fpc.default.so;FI
 # Gatekeeper
 
 # GNSS
-vendor/lib64/libgps.utils.so|22e46639643eade3ee9b8f6e19ae36273d6e74c5
 
 # Hotword Enrollment - from Realme Pad Pro 5G (V816.0.1.0.UFSINXM)
 
 # HubUI - from Google Pixel Tablet (TQ3A.230605.009.A1)
 
 # Identity
-vendor/bin/hw/android.hardware.identity-service-qti|40949904ee581ad4c93c1c1d155f68c102dc3081
+vendor/bin/hw/android.hardware.identity-service-qti|40949904ee581ad4c93c1c1d155f68c102dc3081|f0bb03b0d855874358edccab92d69017266f555b
 vendor/etc/init/android.hardware.identity-service-qti.rc|d60dadc0e2dea6be10133aaa63bccb553a888f8b
 vendor/etc/vintf/manifest/manifest_lahaina_identity.xml|1c09c965d5d3b5bdeacdeab81e039fd07c97a229
-vendor/lib64/libqtiidentitycredential.so|f672cac340af921ba5c67eeb22177e527c1233cd
+vendor/lib64/libqtiidentitycredential.so|f672cac340af921ba5c67eeb22177e527c1233cd|784880d0f1d0d32a205cf99026edf5f1e17a6254
 
 # Keymaster
 vendor/bin/hw/android.hardware.keymaster@4.0-service-qti|7b7aa611dc6a7e2a45aed940037256ef34f3a5b7
@@ -792,16 +786,6 @@ vendor/bin/hw/android.hardware.keymaster@4.0-strongbox-service-qti|6c72815c5a88f
 vendor/etc/vintf/manifest/android.hardware.security.keymint-service-qti-rkp.xml|8808885c5554b4899c659a43bc8a15a448b3777a
 
 # Media - from Xiaomi Pad 6 Max (OS2.0.4.0.VMYCNXM)
-vendor/lib64/libqcodec2_base.so;MODULE_SUFFIX=_liuqin;OVERRIDES=libqcodec2_base|d11aa38e328901f93c06d3d9fc64de51f9b570bc
-vendor/lib64/libqcodec2_basecodec.so;MODULE_SUFFIX=_liuqin;OVERRIDES=libqcodec2_basecodec|a6bb9049eed2b3b957ca157e68b651f15d56655c
-vendor/lib64/libqcodec2_core.so;MODULE_SUFFIX=_liuqin;OVERRIDES=libqcodec2_core|62d859a901b0b496c689b76bb504dbc4f6318aa6|8e2871ea513e92daff1a6b1a3ab7d7b9a4b9abda
-vendor/lib64/libqcodec2_filterbase.so;MODULE_SUFFIX=_liuqin;OVERRIDES=libqcodec2_filterbase|c8abbe8a8e9f1f8803d6f5e2ae886570d4434532
-vendor/lib64/libqcodec2_hooks.so;MODULE_SUFFIX=_liuqin;OVERRIDES=libqcodec2_hooks|94da878f1c495e6592fc8e8bab2ff1166411207d
-vendor/lib64/libqcodec2_mockfilter.so;MODULE_SUFFIX=_liuqin;OVERRIDES=libqcodec2_mockfilter|ff0d9c977b5cbb2892bf59f4ec3309cb9dcbda68
-vendor/lib64/libqcodec2_mockqc2filter.so;MODULE_SUFFIX=_liuqin;OVERRIDES=libqcodec2_mockqc2filter|222ddeb3aba697e0c2ed1f403a41e19ac647f9bd
-vendor/lib64/libqcodec2_platform.so;MODULE_SUFFIX=_liuqin;OVERRIDES=libqcodec2_platform|54de670e33d8c3daa62f6e5f305496554bf5c767
-vendor/lib64/libqcodec2_utils.so;MODULE_SUFFIX=_liuqin;OVERRIDES=libqcodec2_utils|81a06217dc153dbceaacb904de77140bf2878e13
-vendor/lib64/libqcodec2_v4l2codec.so;MODULE_SUFFIX=_liuqin;OVERRIDES=libqcodec2_v4l2codec|34807dd2a5ccc5c8e168a53af9f8c504f011deda
 
 # Media (Configs)
 vendor/etc/media_codecs.xml|40dfb1450141768b3633edaa7c5aa11f1251e6b2|4819737ae0b0d0fff09b8395f9b017aef22f52f1
@@ -835,21 +819,19 @@ vendor/etc/dolby_vision.cfg|83fca9462b834f259064c8f9e784feabde494d35
 vendor/bin/hw/dolbycodec2|16db1742257fd7d41c7d20105d980672e2d85807|2e76b83f299fe712b22f3ea56eda24d85d0ba9c8
 vendor/lib64/c2.dolby.avc.dec.so|439a00c49d07e4fa2451162f75ad1ec6dc5b1ede
 vendor/lib64/c2.dolby.avc.sec.dec.so|9dfdde23db39260bcba3a1d417dd07a5b521f411
-vendor/lib64/c2.dolby.client.so|88bf13140ff1cd767e86a221b579c17c662d9c48|8b0d43b0a1f1fee05498593ae697b2c2da008caa
+vendor/lib64/c2.dolby.client.so|88bf13140ff1cd767e86a221b579c17c662d9c48|a5842b01a4cbd38d741250071fa0d633895e548b
 vendor/lib64/c2.dolby.egl.so|8acc4f5f81efc2d4d590a6f7b8584cd993ffd74a
 vendor/lib64/c2.dolby.hevc.dec.so|1bbf42f25506585e782bd26590c47d952dafe2a0
 vendor/lib64/c2.dolby.hevc.enc.so|e148e4c26d9185b2ebb00be93ae849ec8116be0a
 vendor/lib64/c2.dolby.hevc.sec.dec.so|eb4b421de11c209f2270d5bea5f80a1d8380907a
 vendor/lib64/c2.dolby.store.so|7a6964871f5c6ac19025f5fc7682219bc37c4357
+vendor/lib/c2.dolby.store.so|a262a67d5264731651f98a2353f95361684d8995
 vendor/lib64/libdolbyottcameracontrol.so|e4bb88976d2a2d18d38f0b27c7a90b6e3d7e3269
 vendor/lib64/libdolbyvision.so|50d4104aca0309c8be27bcb0e0066b568b4556ab
 
 # Memory
 
 # Mlipay
-vendor/lib64/vendor.xiaomi.hardware.mlipay@1.0.so;MODULE_SUFFIX=_vendor|f9a24a796d452e706d29a3776e27953a35a7efe3
-vendor/lib64/vendor.xiaomi.hardware.mlipay@1.1.so;MODULE_SUFFIX=_vendor|cc9c93118383d9556727ed5cb61ccc23788f00da
-vendor/lib64/vendor.xiaomi.hardware.mtdservice@1.0.so;MODULE_SUFFIX=_vendor|9b2a80589f00f7fffa7aeb660574d06f09ce26aa
 
 # Native public libraries
 
@@ -996,8 +978,6 @@ vendor/etc/thermal-video.conf|d923b5ba0b4083e9a5b9bafd78cee7360366141a
 vendor/etc/thermal-videochat.conf|7ab28cc58fb6ba076c495d46e9715ed4e2d559d2
 vendor/etc/thermal-yuanshen.conf|608df030409fa3f32c432d61373351e35150b65c
 vendor/etc/thermald-devices.conf|fcc1f406cd3cdc003e5c81bf4f9c73c0809648c9
-vendor/lib64/vendor.qti.hardware.limits@1.0.so;MODULE_SUFFIX=_vendor|a09b1a3d63354213dbeb1cce95631081ab1a6c81
-vendor/lib64/vendor.qti.hardware.limits@1.1.so;MODULE_SUFFIX=_vendor|bc639ff2d9ac0b9b2ea47484d3b0fdb241faaf3e
 
 # Time Services
 
@@ -1014,7 +994,6 @@ vendor/etc/init/vendor.xiaomi.hw.touchfeature@1.0-service.rc|07e74f30d232f2767d0
 vendor/etc/vintf/manifest/vendor.xiaomi.hw.touchfeature@1.0-service.xml|96cd6606fc97c995d808ba1f83fa148fe6f37784
 vendor/etc/init.panel_info.sh|5225231bf05cbce7ad8ca5c369c1a7a33730b4c8
 vendor/lib64/hw/vendor.xiaomi.hw.touchfeature@1.0-impl.so|500e60fafa7bf2600ca298fb01dfc6651124d2c6
-vendor/lib64/vendor.xiaomi.hw.touchfeature@1.0.so;MODULE_SUFFIX=_vendor|e2fbb35d402f8b0ec10974a1a1eae16786bc5c80
 
 # Trusted User Interface
 vendor/bin/hw/vendor.qti.hardware.trustedui@1.0-service-qti|91b4186eb0c290339f7d3e2bbc856351c62803b9
@@ -1058,7 +1037,6 @@ vendor/firmware/vpu20_4v.mbn|be188b6e3ba8c01bd384475bf59efa0da0696e17
 vendor/firmware/vpu20_4v.mdt|d94ddc875022a0935450d9a56f79f21e9dc6e915
 
 # Wi-Fi
-vendor/bin/cnss-daemon;MODULE_SUFFIX=_liuqin;OVERRIDES=cnss-daemon|1d266903d1d04dc60c7bd87dd8228b5769d34a15
 
 # Wi-Fi (Configs)
 vendor/etc/wifi/qca6490/WCNSS_qcom_cfg.ini|fe8e54a4c651c5bda1dcbc8289fa1bc83876a008
@@ -1072,3 +1050,6 @@ vendor/lib64/libhdcp2p2prov.so|35472c8f30f28fa8d19a639b66fe1c6c3f0b5a5e
 vendor/lib64/libhdcpsrm.so|f5066b3bf1c75b13cca0d37bebb0888234c43a94
 vendor/lib64/libmiracast.so|dde5673bec1950884e0f086cf31e866e66160244
 vendor/lib64/vendor.qti.hardware.sigma_miracast@1.0.so|35b5b2ef78c952976a3bca76a896bbc7a66e6b72
+vendor/lib64/vendor.qti.hardware.ListenSoundModel@1.0.so|4c97303b874061c8da841b5e9a2ddb1e22937991
+vendor/lib64/vendor.qti.hardware.limits@1.0.so|a09b1a3d63354213dbeb1cce95631081ab1a6c81
+vendor/lib64/vendor.qti.hardware.limits@1.1.so|bc639ff2d9ac0b9b2ea47484d3b0fdb241faaf3e

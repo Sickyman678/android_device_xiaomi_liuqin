@@ -34,9 +34,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/displayconfig/display_id_4630947141052476290.xml:$(TARGET_COPY_OUT_VENDOR)/etc/displayconfig/display_id_4630947141052476290.xml \
     $(LOCAL_PATH)/configs/displayconfig/display_id_4630947200012256898.xml:$(TARGET_COPY_OUT_VENDOR)/etc/displayconfig/display_id_4630947200012256898.xml
 
-# Dolby Vision
-PRODUCT_PACKAGES += \
-    XiaomiDolby
+# Dolby Vision: XiaomiDolby app is a proprietary Xiaomi module that
+# isn't published anywhere; revisit once we extract or rebuild it.
+# PRODUCT_PACKAGES += \
+#     XiaomiDolby
 
 # Init scripts (liuqin-specific). init.target.rc, fstab.qcom and
 # ueventd.xiaomi.rc are dropped because sm8450-common already installs
