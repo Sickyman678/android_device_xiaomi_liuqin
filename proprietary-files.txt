@@ -101,26 +101,17 @@ vendor/etc/vintf/manifest/manifest_non_qmaa_extn.xml|976d39efc9a627fa167bec59e39
 vendor/lib64/hw/audio.primary.taro.so;MODULE_SUFFIX=_liuqin;OVERRIDES=audio.primary.taro|56644b954a3a40c045bdd4668109d5b967624af7|7839df2c0c232436f6f1538c8795c5876ac25884
 vendor/lib64/hw/gyro_fusion_interface.so|f641d0218448881849d0cbf4f5759a735227125a
 vendor/lib64/lib_misound_asc.so|542f403ffb06e44c8c6c7998b372d325364fbb20
-vendor/lib64/libar-acdb.so|a4cc1b6543df2a4da098955b93070212b8fd7fed
-vendor/lib64/libar-gpr.so|45e10d3330755743082731a5d6f99cfc50cb7b94
-vendor/lib64/libar-gsl.so|ce0396fdd28f046208ba9d9920bd653825de47c0
-vendor/lib64/libar-pal.so|77317c0ac0f817e0fbc7c7920d441956fdda0c4a
-vendor/lib64/libats.so|c510886e4044b63e91a66e0e1746296d8f6617b9
 vendor/lib64/libaudiocloudctrl.so|f7fd4492a12ed3db6ee8ea8f9ea4d4189629c17d
 vendor/lib64/libaudioroute_ext.so|d92a707f5e589967309982e3749c2db316245db0
 vendor/lib64/libcrussp.so|c026a712e0a75e7c8d2bf203f051df737261080f
 vendor/lib64/libeai_fixed.so|d43c8f3a75f5ae4fcf9cd11a15832fbcd95fdd5a
 vendor/lib64/libeai_float.so|883e4f4e6d64adf9ffbe2d4aaef1ede015611826
-vendor/lib64/libfmpal.so|2b6ef3a970045a11608da47227421880e63a0b22
 vendor/lib64/libkaraokepal.so|9be3c6c4bbb06568ac63199699d17e42a62b8601
 vendor/lib64/liblistensoundmodel2vendor.so|5da2dd0c654427c1ad347de2212e0d25bfb4cf32
-vendor/lib64/liblx-osal.so|a08f2f574bece90eb0a687f9bd8de121c62a5fe0
-vendor/lib64/libpalclient.so|8b7629e49f75126e8b3844ebf5423f3f6cb825a8
 vendor/lib64/libresampler.so|b38622335b7a883e06f4f48e0f8df33c179d034f
 vendor/lib64/libxlog.so|d0914183eb15708d151669b4f6c80f77b05936c5
 vendor/lib64/vendor.qti.hardware.ListenSoundModel@1.0-impl.so|4401f02ca14b99d9ceba4eb5cce0aaa5727fa96e
 vendor/lib64/vendor.qti.hardware.ListenSoundModel@1.0.so;MODULE_SUFFIX=_vendor|4c97303b874061c8da841b5e9a2ddb1e22937991
-vendor/lib64/vendor.qti.hardware.pal@1.0-impl.so|b1a7580ff1300f3fab9a5fd6ef6a3c726dd8cb8d
 
 # Audio (ACDB)
 vendor/etc/acdbdata/Forte/Forte_acdb_cal.acdb|d7c108c768cbd53574d3661a4180331cfa9acdb9
@@ -144,19 +135,11 @@ vendor/etc/acdbdata/nn_ns_models/fai__2.7.2_0.0__3.0.0_0.0__eai_1.36_enpu2.pmd|1
 vendor/etc/acdbdata/nn_vad_models/fai__3.0.0_0.0__eai_1.36_enpu2.pmd|997e9e31b6bc7e9abc3f060f824ac3dd14c3d662
 
 # Audio (AGM)
-vendor/bin/hw/vendor.qti.hardware.AGMIPC@1.0-service|1930a5d7c6bf58674d4c6b3d850eeede2fddbbd6
 vendor/bin/agmcap|677b0b41887ccc5387fcae342a135884c3e5f335
 vendor/bin/agmcompressplay|387c6974dbc93ee5c40d3d897f06f7df03dfd51c
 vendor/bin/agmplay|047fde0a71dff595425289830e89d126367f31aa
 vendor/etc/init/vendor.qti.hardware.AGMIPC@1.0-service.rc|6a0e05e82c960d20cf496d3d113dc55219e71bfa
-vendor/lib64/libagm.so|f692a4b65a9be72bd38e05980550d1afacdd0cbb
-vendor/lib64/libagm_compress_plugin.so|ffac2c7e63b336d5460a941480e56b177156572e
-vendor/lib64/libagm_mixer_plugin.so|17459043f859c3fd64078db6cf37b8cbc2eba452
-vendor/lib64/libagm_pcm_plugin.so|b484f3238ba93fae159c39ff4ec9f9285dddea52
-vendor/lib64/libagmclient.so|5b6c9a379c9f2a016200ab04a1aa67d51135a06a
 vendor/lib64/libagmmixer.so|5b31945fa4cccace26970e9478b3c77dead7379d
-vendor/lib64/libsndcardparser.so|3c9ed60c417efe122ee51ffebf1ebf5f71a854da
-vendor/lib64/vendor.qti.hardware.AGMIPC@1.0-impl.so|7655e11af91c974917a47aa1f8bf277b5ac1e54c
 
 # Audio (Configs)
 vendor/etc/audio/sku_cape/audio_effects.xml|2ae8b4a45b730efb23dd491a163346808c033a3c
@@ -213,8 +196,6 @@ vendor/lib64/soundfx/libvisualizer.so|6cadbbfebcf48235485c712616b956fcf3d98470
 
 # Bluetooth
 vendor/lib64/hw/audio.bluetooth_qti.default.so|8f401ff890cf257f128e3de132bba246c8cca80d
-vendor/lib64/lib_bt_ble.so|0c5c87feb0664bc978bd088cdb860b1169e34351
-vendor/lib64/lib_bt_bundle.so|09ad84b03225b118c5a0600ec4df2156765ea53a
 vendor/lib64/lib_bt_lhdc.so|101e17578788670ff78382aaadcfc9e15abc313d
 vendor/lib64/libbt-hidlclient.so|b31d8c496041f4b7923028459d2f55cab59d808b
 
@@ -776,9 +757,6 @@ vendor/etc/display/qdcm_calib_data_xiaomi_m81_36_02_0a_dualdsi_dsc_lcd_video_pan
 vendor/etc/display/qdcm_calib_data_xiaomi_m81_42_02_0b_dualdsi_dsc_lcd_video_panel.json|b95db83012edc374cec9dedc5e706857bb753199
 
 # DPM
-vendor/lib64/com.qualcomm.qti.dpm.api@1.0.so|19430d592c7f815899844fcc22388466a8135e65
-vendor/lib64/vendor.qti.hardware.dpmservice@1.0.so|1d690710fc30aef32e343734f7f72b6a16913389
-vendor/lib64/vendor.qti.hardware.dpmservice@1.1.so|6fea2e5f9144a841e5dbac473a2441be979ec73c
 
 # DRM
 vendor/lib64/libtzdrmgenprov.so|5b2edbf2e82aca5ba588751a2eea1984812304de
@@ -885,7 +863,6 @@ vendor/lib64/libQnnHtpAltPrepV69Stub.so|a9a9a41224ca899c7e4539b4932bc605317791cf
 # PD
 
 # QCC
-vendor/lib64/vendor.qti.hardware.qccvndhal@1.0.so|bfddf0a295b391bc1ed7961d547e9b56e3aa1b9c
 
 # QCV
 vendor/lib64/libsoc_helper_jni.so|eee710cf5eea3d8c2fc312ab68934cad58efb673
