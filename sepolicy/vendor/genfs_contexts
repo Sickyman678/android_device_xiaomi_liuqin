@@ -1,8 +1,2 @@
-# Battery
-genfscon sysfs "/class/qcom-battery" u:object_r:vendor_sysfs_qcom_battery:s0
-
-# Fingerprint
-genfscon sysfs /devices/platform/soc/soc:fingerprint_fpc u:object_r:vendor_sysfs_fingerprint:s0
-
-# Wakeup nodes
+# Wakeup node specific to liuqin (sm8450-common uses wakeup_enable not wakeup/wakeup)
 genfscon sysfs /devices/platform/soc/soc:fingerprint_fpc/wakeup/wakeup u:object_r:sysfs_wakeup:s0

@@ -2,7 +2,8 @@
      Copyright (C) 2023 Paranoid Android
      SPDX-License-Identifier: Apache-2.0
 -->
-<manifest version="1.0" type="device">
+<manifest version="1.0" type="device" target-level="6">
+    <kernel target-level="6"/>
     <hal format="hidl">
         <name>vendor.xiaomi.hardware.bgservice</name>
         <transport>hwbinder</transport>

@@ -1,2 +1,1 @@
-# Fingerprint
-type vendor_fingerprint_device, dev_type;
+# Fingerprint device type is provided by sm8450-common.

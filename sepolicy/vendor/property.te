@@ -1,3 +1,2 @@
-# Fingerprint
-vendor_public_prop(vendor_fp_prop)
-vendor_restricted_prop(vendor_fp_info_prop)
+# vendor_fp_prop and vendor_fp_info_prop are now provided by
+# device/xiaomi/sm8450-common/sepolicy/vendor/property.te.

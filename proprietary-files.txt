@@ -134,7 +134,6 @@ vendor/etc/acdbdata/nn_vad_models/fai__3.0.0_0.0__eai_1.36_enpu2.pmd|997e9e31b6b
 vendor/bin/agmcap|677b0b41887ccc5387fcae342a135884c3e5f335
 vendor/bin/agmcompressplay|387c6974dbc93ee5c40d3d897f06f7df03dfd51c
 vendor/bin/agmplay|047fde0a71dff595425289830e89d126367f31aa
-vendor/etc/init/vendor.qti.hardware.AGMIPC@1.0-service.rc|6a0e05e82c960d20cf496d3d113dc55219e71bfa
 vendor/lib64/libagmmixer.so|5b31945fa4cccace26970e9478b3c77dead7379d
 
 # Audio (Configs)
@@ -178,17 +177,9 @@ vendor/firmware/cs35l41-dsp1-spk-cali.wmfw|ac5f22fb8397ffa4d2f958d08859d21990ecc
 vendor/firmware/cs35l41-dsp1-spk-prot.wmfw|ac5f22fb8397ffa4d2f958d08859d21990eccdbc
 
 # Audio (FX Modules)
-vendor/lib64/soundfx/libaudiopreprocessing.so|4031e783d46ff8dd3561a73fb7d2a85c2b626ccf
-vendor/lib64/soundfx/libbundlewrapper.so|58867b3d417df604f2ef7add435b62b462e1b18a
-vendor/lib64/soundfx/libdownmix.so|453a42461f37e832a37c4995535de1f5f9ff6b58
-vendor/lib64/soundfx/libdynproc.so|3b2c75052ff054b9529ac99298753d8bd60e60ad
-vendor/lib64/soundfx/libeffectproxy.so|5c6fd6923a36510a9fbe8f67c4ae1ccd4672f6e5
-vendor/lib64/soundfx/libldnhncr.so|d3b10aa7c1dd8fd9fbdf59ad8986ba601efd8992
 vendor/lib64/soundfx/libmisoundfx.so|9f2f62f50bfcee7edb5b051462034f977aac0ca1
-vendor/lib64/soundfx/libreverbwrapper.so|2baa316d4632e6cb50fd099e6cc03c6d162276c5
 vendor/lib64/soundfx/libshoebox.so|5803ec39c6237cb60093f996056c4790a19eb26a
 vendor/lib64/soundfx/libswdap.so|7d800a80de5e965983a02570d07324fb5a0eb87c
-vendor/lib64/soundfx/libvisualizer.so|6cadbbfebcf48235485c712616b956fcf3d98470
 
 # Bluetooth
 vendor/lib64/hw/audio.bluetooth_qti.default.so|8f401ff890cf257f128e3de132bba246c8cca80d
@@ -783,7 +774,6 @@ vendor/bin/hw/android.hardware.keymaster@4.0-service-qti|7b7aa611dc6a7e2a45aed94
 vendor/bin/hw/android.hardware.keymaster@4.0-strongbox-service-qti|6c72815c5a88ff31089337c986f5e59c17989eab
 
 # Keymint
-vendor/etc/vintf/manifest/android.hardware.security.keymint-service-qti-rkp.xml|8808885c5554b4899c659a43bc8a15a448b3777a
 
 # Media - from Xiaomi Pad 6 Max (OS2.0.4.0.VMYCNXM)
 

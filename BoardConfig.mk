@@ -26,6 +26,8 @@ TARGET_KERNEL_CONFIG := \
 
 # VINTF (liuqin-specific Xiaomi HAL declarations, on top of sm8450-common)
 DEVICE_MANIFEST_FILE += $(DEVICE_PATH)/configs/vintf/manifest_xiaomi.xml
+DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += \
+    $(DEVICE_PATH)/configs/vintf/framework_compatibility_matrix_xiaomi.xml
 
 # Filesystem types - Pad 6 Pro ships with erofs, override sm8450-common's ext4
 BOARD_ODMIMAGE_FILE_SYSTEM_TYPE := erofs
@@ -55,3 +57,7 @@ TARGET_SCREEN_DENSITY := 340
 BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
 SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/private
 SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/public
+
+# vendor/lib/rfsa/adsp/*.so are HEXAGON ELFs (not ARM) extracted via
+# PRODUCT_COPY_FILES; allow them to bypass the AOSP ELF-prebuilt check.
+BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true

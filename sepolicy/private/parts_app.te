@@ -1,12 +1,15 @@
+type parts_app, domain;
 typeattribute parts_app mlstrustedsubject;
 
 app_domain(parts_app)
 
 binder_use(parts_app)
 
-hal_client_domain(parts_app, hal_touchfeature_xiaomi)
-
-binder_call(parts_app, hal_touchfeature_xiaomi)
+# AOSPA's sepolicy attribute hal_touchfeature_xiaomi is not provided
+# by LineageOS/hardware/xiaomi. Disable until the touchfeature HAL gets
+# wired up via vendor.lineage.touch (sm8450-common).
+# hal_client_domain(parts_app, hal_touchfeature_xiaomi)
+# binder_call(parts_app, hal_touchfeature_xiaomi)
 
 allow parts_app {
   activity_service
@@ -16,9 +19,9 @@ allow parts_app {
   vendor_perf_service
 }:service_manager find;
 
-allow parts_app {
-  hal_touchfeature_xiaomi_hwservice
-}:hwservice_manager find;
+# allow parts_app {
+#   hal_touchfeature_xiaomi_hwservice
+# }:hwservice_manager find;
 
 allow parts_app system_app_data_file:dir create_dir_perms;
 allow parts_app system_app_data_file:{
