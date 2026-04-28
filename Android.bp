@@ -1,6 +1,6 @@
 //
-// Copyright (C) 2023 Paranoid Android
-//
+// SPDX-FileCopyrightText: 2023 Paranoid Android
+// SPDX-FileCopyrightText: The LineageOS Project
 // SPDX-License-Identifier: Apache-2.0
 //
 
@@ -10,15 +10,5 @@ soong_namespace {
     ],
 }
 
-install_symlink {
-    name: "firmware_wlan_mac.bin_symlink",
-    vendor: true,
-    installed_location: "firmware/wlan/qca_cld/qca6490/wlan_mac.bin",
-    symlink_target: "/mnt/vendor/persist/qca6490/wlan_mac.bin",
-}
-install_symlink {
-    name: "firmware_WCNSS_qcom_cfg.ini_symlink",
-    vendor: true,
-    installed_location: "firmware/wlan/qca_cld/qca6490/WCNSS_qcom_cfg.ini",
-    symlink_target: "/vendor/etc/wifi/qca6490/WCNSS_qcom_cfg.ini",
-}
+// Note: WiFi firmware symlinks (qca6490 wlan_mac.bin / WCNSS_qcom_cfg.ini)
+// are provided by device/xiaomi/sm8450-common which we inherit from.

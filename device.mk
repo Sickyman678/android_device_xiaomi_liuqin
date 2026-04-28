@@ -20,10 +20,10 @@ PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxxhdpi
 PRODUCT_AAPT_PREBUILT_DPI := xxxhdpi xxhdpi xhdpi hdpi
 
-# Audio (liuqin-specific cape SKU)
+# Audio: sm8450-common already populates sku_cape/audio_effects.xml and
+# sku_cape/audio_policy_configuration.xml. Only the liuqin-specific
+# Dolby codec file goes here.
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_cape/audio_effects.xml \
-    $(LOCAL_PATH)/configs/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_cape/audio_policy_configuration.xml \
     $(LOCAL_PATH)/configs/audio/media_codecs_dolby_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_dolby_audio.xml
 
 # Characteristics (Pad 6 Pro is a WiFi-only tablet)
@@ -38,12 +38,12 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     XiaomiDolby
 
-# Init scripts (liuqin-specific)
+# Init scripts (liuqin-specific). init.target.rc, fstab.qcom and
+# ueventd.xiaomi.rc are dropped because sm8450-common already installs
+# its own at the same paths.
 PRODUCT_PACKAGES += \
-    init.target.rc \
     init.mi_perf.rc \
-    init.mi_service.rc \
-    ueventd.xiaomi.rc
+    init.mi_service.rc
 
 # Input device configuration (stylus + keyboard)
 PRODUCT_COPY_FILES += \
@@ -80,10 +80,6 @@ PRODUCT_PACKAGES += \
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/window_extensions.mk)
 
-# WiFi (liuqin-specific qca6490 firmware paths)
-PRODUCT_PACKAGES += \
-    firmware_WCNSS_qcom_cfg.ini_symlink \
-    firmware_wlan_mac.bin_symlink
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/wifi/WCNSS_qcom_cfg.ini:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/qca6490/WCNSS_qcom_cfg.ini
+# WiFi: sm8450-common already provides the qca6490 firmware symlinks
+# and a generic WCNSS_qcom_cfg_qca6490.ini. liuqin doesn't need its own
+# overrides at this stage.

@@ -1,21 +1,13 @@
 //
-// Copyright (C) 2023 Paranoid Android
-//
+// SPDX-FileCopyrightText: 2023 Paranoid Android
+// SPDX-FileCopyrightText: The LineageOS Project
 // SPDX-License-Identifier: Apache-2.0
 //
-
-prebuilt_etc {
-    name: "fstab.qcom",
-    src: "fstab.qcom",
-    vendor: true,
-}
-
-prebuilt_etc {
-    name: "init.target.rc",
-    src: "init.target.rc",
-    sub_dir: "init/hw",
-    vendor: true,
-}
+// Note: init.target.rc, fstab.qcom and ueventd.xiaomi.rc are provided
+// by device/xiaomi/sm8450-common at the same install paths, so the
+// liuqin-tree variants are intentionally not registered here. Only
+// keep modules that don't conflict.
+//
 
 prebuilt_etc {
     name: "init.mi_perf.rc",
@@ -29,11 +21,4 @@ prebuilt_etc {
     src: "init.mi_service.rc",
     sub_dir: "init/hw",
     vendor: true,
-}
-
-prebuilt_etc {
-    name: "ueventd.xiaomi.rc",
-    filename: "ueventd.rc",
-    src: "ueventd.xiaomi.rc",
-    device_specific: true,
 }
