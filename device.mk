@@ -26,6 +26,23 @@ PRODUCT_AAPT_PREBUILT_DPI := xxxhdpi xxhdpi xhdpi hdpi
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/audio/media_codecs_dolby_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_dolby_audio.xml
 
+# Audio overrides for liuqin (CS35L41 quad-amp via TDM tertiary RX).
+# These shadow the same-named files inherited from vendor/xiaomi/liuqin
+# (which carry the stock sku_cape configuration targeting WSA SoundWire
+# hardware that this tablet does not have).
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/audio/mixer_paths_waipio_mtp.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_cape/mixer_paths_waipio_mtp.xml \
+    $(LOCAL_PATH)/audio/resourcemanager_waipio_mtp.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_cape/resourcemanager_waipio_mtp.xml \
+    $(LOCAL_PATH)/audio/usecaseKvManager.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usecaseKvManager.xml
+
+# Audio debug tools (tinymix / tinyplay / tinycap / tinypcminfo).
+# Useful for verifying mixer kctl names and PCM routing on-device.
+PRODUCT_PACKAGES += \
+    tinymix \
+    tinyplay \
+    tinycap \
+    tinypcminfo
+
 # Characteristics (Pad 6 Pro is a WiFi-only tablet)
 PRODUCT_CHARACTERISTICS := tablet,nosdcard
 

@@ -7,4 +7,11 @@
             <instance>default</instance>
         </interface>
     </hal>
+    <!--
+        Codec2 dolby/default1 HIDL entries removed in lockstep with
+        manifest_xiaomi.xml: the Dolby and qti.media.c2 prebuilts that
+        publish them depend on libstagefright_foundation-v33.so, which
+        Android 16 no longer ships. AOSP/qcom-caf 'default'+'software'
+        AIDL paths still cover the framework requirement.
+    -->
 </compatibility-matrix>

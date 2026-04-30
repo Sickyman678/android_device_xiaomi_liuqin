@@ -110,8 +110,13 @@ vendor/lib64/libresampler.so|b38622335b7a883e06f4f48e0f8df33c179d034f
 vendor/lib64/libxlog.so|d0914183eb15708d151669b4f6c80f77b05936c5
 
 # Audio (ACDB)
-vendor/etc/acdbdata/Forte/Forte_acdb_cal.acdb|d7c108c768cbd53574d3661a4180331cfa9acdb9
-vendor/etc/acdbdata/Forte/Forte_workspaceFileXml.qwsp|7027f639080bc39a12ca6d53a8dbfb8ea9979e64
+# Forte_*.{acdb,qwsp} live in dump under acdbdata/Forte/ but qcom-caf AGM
+# (sm8450 source, used for both 8 Gen 1 and 8+ Gen 1) derives the lookup
+# directory from the kernel-reported snd-card name. Pad 6 Pro reports
+# 'waipio-mtp-snd-card' so AGM opens /vendor/etc/acdbdata/waipio_mtp.
+# Same pattern as device/xiaomi/mondrian (Tutu/ -> waipio_mtp/).
+vendor/etc/acdbdata/Forte/Forte_acdb_cal.acdb:vendor/etc/acdbdata/waipio_mtp/Forte_acdb_cal.acdb|d7c108c768cbd53574d3661a4180331cfa9acdb9
+vendor/etc/acdbdata/Forte/Forte_workspaceFileXml.qwsp:vendor/etc/acdbdata/waipio_mtp/Forte_workspaceFileXml.qwsp|7027f639080bc39a12ca6d53a8dbfb8ea9979e64
 vendor/etc/acdbdata/IDP_UPD/IDP_UPD_acdb_cal.acdb|37b3cd4c4f3df074ac7818acb07bdc3d5d6f16ef
 vendor/etc/acdbdata/IDP_UPD/IDP_UPD_workspaceFileXml.qwsp|cfa88f898675164f78b4cb964b634840d91981b4
 vendor/etc/acdbdata/IDP_UPD_diwali/IDP_UPD_diwali_acdb_cal.acdb|46e01a48796e4e087b73545109d8b7c25a103a0d
@@ -141,18 +146,14 @@ vendor/etc/audio/sku_cape/audio_effects.xml|2ae8b4a45b730efb23dd491a163346808c03
 vendor/etc/audio/sku_cape/mixer_paths_overlay_dynamic.xml|0c0ff1d3aace49218d91c13b28601dce0b26e13f
 vendor/etc/audio/sku_cape/mixer_paths_overlay_static.xml|70a960590c473176888a0d46da7766517db60bf1|b6a5aaf2710c3f0864a204bd3c4ba0b941b14779
 vendor/etc/audio/sku_cape/mixer_paths_waipio_cdp.xml|6a8b7a6792826a4128c48f2361c32b5c4e96b550
-vendor/etc/audio/sku_cape/mixer_paths_waipio_mtp.xml|2e8b759538abb27935133843e22b33f83f8154dd
 vendor/etc/audio/sku_cape/mixer_paths_waipio_qrd.xml|49a8e2b214a04b924651f8a6a2a6372c721f2928
 vendor/etc/audio/sku_cape/resourcemanager_upd.xml|05db4091ce5c456ac74693229bbeeebddb09e0c7
 vendor/etc/audio/sku_cape/resourcemanager_waipio_cdp.xml|740b332579266c28151542ae99585aea380a0957
-vendor/etc/audio/sku_cape/resourcemanager_waipio_mtp.xml|2c7df2810adaa51eb43b0b2645fec149cba6b3b0
 vendor/etc/audio/sku_cape/resourcemanager_waipio_qrd.xml|cf1399b4b97e3d82afb3561108b7c5d80ae3c8da
 vendor/etc/audio_cloud_control_white_list.xml|0acc61cbb1a586654d59dbd5e8f89c7086567ea5
-vendor/etc/backend_conf.xml|3b4f9b0eb71a8f6a33acd99b3eefc4aec80d5fd3
 vendor/etc/bluetooth_qti_hearing_aid_audio_policy_configuration.xml|1e3e692dbb4e7ee96b0a6c71ada2fc67689d015e
 vendor/etc/card-defs.xml|1b554e76fb11661858ee7843aecb62cc22361176
 vendor/etc/microphone_characteristics.xml|133a6a72803e9d6b61f19e0861d2a2597c2e9c67
-vendor/etc/usecaseKvManager.xml|003a488cd56998cac36dcb22041d1c567fc26863
 
 # Audio (EAI Models)
 
@@ -789,9 +790,13 @@ vendor/etc/media_profiles.xml|981dd4a7ffb9020aa1142930ff3ae6d07bda12aa
 vendor/etc/media_profiles_V1_0.xml|2da4310e65720a36ee8422228959795f467f102e
 
 # Media (Dolby Audio) - from Xiaomi Pad 6 Max (OS2.0.4.0.VMYCNXM)
-vendor/bin/hw/vendor.dolby.hardware.dms@2.0-service|eb3dfe12845201eec35d3ceb0c18e8eb8e877a0f|39e2c4f7762c9540b5ad4ac58f24ad230b01f417
-vendor/etc/init/vendor.dolby.hardware.dms@2.0-service.rc|29296ebfe89b2697fec573be73cc3757fd97bed6
-vendor/etc/init/vendor.dolby.media.c2@1.0-service.rc|1ea8b363e94fd4f5410cadceb30de8229fb38045
+# NOTE: dolbycodec2 + DMS@2.0 service binaries and their two .rc init
+# scripts are intentionally NOT extracted. They link against
+# libstagefright_foundation-v33.so which Android 16 no longer ships
+# (VNDK was removed); shipping them produces a crash-loop that blocks
+# system_server's AudioService init via the Codec2 binder path. The
+# .so libraries below are still extracted because they are dlopen'd
+# only by the disabled binaries, so they remain harmless on disk.
 vendor/lib64/soundfx/libhwdap.so|c9a022b299c744d832136c9125a9372cb226ee8a
 vendor/lib64/soundfx/libswgamedap.so|5d20994e801f11c098af4cd646b96574dba40e71
 vendor/lib64/soundfx/libswvqe.so|0f56d1adfab8ee3961b1af2b55f5d717099b3ef6
@@ -806,7 +811,8 @@ vendor/etc/dolby/dax-default.xml|96a18f03309ac0b1b13a7cc5aa106379ef6290b4
 vendor/etc/dolby_vision.cfg|83fca9462b834f259064c8f9e784feabde494d35
 
 # Media (Dolby Vision) - from Xiaomi Pad 6 Max (OS2.0.4.0.VMYCNXM)
-vendor/bin/hw/dolbycodec2|16db1742257fd7d41c7d20105d980672e2d85807|2e76b83f299fe712b22f3ea56eda24d85d0ba9c8
+# NOTE: see comment in 'Media (Dolby Audio)' above; dolbycodec2 binary
+# is intentionally not extracted. The c2.dolby.* libraries remain.
 vendor/lib64/c2.dolby.avc.dec.so|439a00c49d07e4fa2451162f75ad1ec6dc5b1ede
 vendor/lib64/c2.dolby.avc.sec.dec.so|9dfdde23db39260bcba3a1d417dd07a5b521f411
 vendor/lib64/c2.dolby.client.so|88bf13140ff1cd767e86a221b579c17c662d9c48|a5842b01a4cbd38d741250071fa0d633895e548b
