@@ -12,11 +12,11 @@
   to let roomservice resolve transitive deps, then `repo sync -j8`.
 -->
 <manifest>
-  <remote name="lossantospro" fetch="https://github.com/LosSantosPro/" revision="lineage-23.2" />
+  <remote name="yunyanyou" fetch="https://github.com/yunyanyou/" revision="lineage-23.2" />
   <remote name="muppets" fetch="https://github.com/TheMuppets/" revision="lineage-23.2" />
 
   <!-- Liuqin device tree -->
-  <project name="android_device_xiaomi_liuqin" path="device/xiaomi/liuqin" remote="lossantospro" />
+  <project name="android_device_xiaomi_liuqin" path="device/xiaomi/liuqin" remote="yunyanyou" />
 
   <!-- Common Xiaomi sm8450 vendor blobs from TheMuppets (LineageOS official). -->
   <project name="proprietary_vendor_xiaomi_sm8450-common" path="vendor/xiaomi/sm8450-common" remote="muppets" />
@@ -24,5 +24,5 @@
   <!-- Liuqin-specific vendor blobs (touch firmware, panel calibration,
        stylus, Adreno a730 firmware, Dolby Vision codecs, camera tuning).
        Extracted from stock OS3.0.5.0.VMYCNXM (Android 15, CN). -->
-  <project name="proprietary_vendor_xiaomi_liuqin" path="vendor/xiaomi/liuqin" remote="lossantospro" />
+  <project name="proprietary_vendor_xiaomi_liuqin" path="vendor/xiaomi/liuqin" remote="yunyanyou" />
 </manifest>
