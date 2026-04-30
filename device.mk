@@ -20,12 +20,6 @@ PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxxhdpi
 PRODUCT_AAPT_PREBUILT_DPI := xxxhdpi xxhdpi xhdpi hdpi
 
-# Audio: sm8450-common already populates sku_cape/audio_effects.xml and
-# sku_cape/audio_policy_configuration.xml. Only the liuqin-specific
-# Dolby codec file goes here.
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/audio/media_codecs_dolby_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_dolby_audio.xml
-
 # Audio overrides for liuqin (CS35L41 quad-amp via TDM tertiary RX).
 # These shadow the same-named files inherited from vendor/xiaomi/liuqin
 # (which carry the stock sku_cape configuration targeting WSA SoundWire
