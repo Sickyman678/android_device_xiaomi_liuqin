@@ -28,7 +28,9 @@ public class KeyboardUtilsService extends Service {
         if (mInputManager == null) {
             mInputManager = (InputManager) getSystemService(Context.INPUT_SERVICE);
         }
-        setKeyboardEnabled(false);
+        // Do NOT disable the keyboard by default. On third-party ROMs any
+        // HID keyboard (including non-official ones) should stay usable.
+        setKeyboardEnabled(true);
     }
 
     @Override

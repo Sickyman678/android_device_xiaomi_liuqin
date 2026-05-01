@@ -68,9 +68,22 @@ public class PenUtilsService extends Service {
         mInputManager.registerInputDeviceListener(mInputDeviceListener, null);
         mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         mSharedPrefs.registerOnSharedPreferenceChangeListener(mSharedPrefsListener);
-        mUEventObserver.startObserving(STYLUS_CHARING_DEVPATH);
+        // Reverse-charging UEvent observer disabled: opens a
+        // netlink_kobject_uevent_socket from this app's SELinux domain, which
+        // system_app (where com.xiaomi.settings now lives after parts_app was
+        // removed) cannot create. The failure happens on UEventThread, not the
+        // caller, so it cannot be try/catched and crashes the persistent
+        // service on every boot. Reverse-charging detection only matters for
+        // genuine Xiaomi pens; third-party MPP pens never trigger it anyway.
+        // mUEventObserver.startObserving(STYLUS_CHARING_DEVPATH);
         mIsPenCharging = FileUtils.readLineInt(STYLUS_CHARING_PATH) == 1;
-        mIsPenModeForced = mSharedPrefs.getBoolean(STYLUS_KEY, false);
+        // Default to forced-on. Third-party MPP pens are passive and do not
+        // register as a connected InputDevice unless they are actively touching
+        // the screen, so the InputDevice-based path in refreshPenMode() would
+        // never activate Pen Mode. Forcing it on out of the box keeps 120Hz +
+        // touch tuning + overlay disable always active; users can still turn
+        // this off from StylusSettingsFragment.
+        mIsPenModeForced = mSharedPrefs.getBoolean(STYLUS_KEY, true);
         mSurfaceFlinger = ServiceManager.getService(SURFACE_FLINGER_SERVICE_KEY);
         mDefaultMinRate = Settings.System.getFloat(getContentResolver(), KEY_MIN_REFRESH_RATE, 30f);
         mDefaultPeakRate = Settings.System.getFloat(getContentResolver(), KEY_PEAK_REFRESH_RATE, 144f);
@@ -159,8 +172,13 @@ public class PenUtilsService extends Service {
     }
 
     private boolean isDeviceXiaomiPen(int id) {
+        // Accept any stylus-capable input device, not only the official
+        // Xiaomi Smart Pen (VID=6421 / PID=19841). Third-party MPP-compatible
+        // pens expose SOURCE_STYLUS and should enable pen mode as well.
         InputDevice inputDevice = mInputManager.getInputDevice(id);
-        return inputDevice.getVendorId() == 6421 && inputDevice.getProductId() == 19841;
+        if (inputDevice == null) return false;
+        return (inputDevice.getSources() & InputDevice.SOURCE_STYLUS)
+                == InputDevice.SOURCE_STYLUS;
     }
 
     private InputDeviceListener mInputDeviceListener = new InputDeviceListener() {
@@ -182,7 +200,7 @@ public class PenUtilsService extends Service {
         public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
             if (DEBUG) Log.d(TAG, "onSharedPreferenceChanged: " + key);
             if (key.equals(STYLUS_KEY)) {
-                mIsPenModeForced = prefs.getBoolean(STYLUS_KEY, false);
+                mIsPenModeForced = prefs.getBoolean(STYLUS_KEY, true);
                 refreshPenMode();
             }
         }

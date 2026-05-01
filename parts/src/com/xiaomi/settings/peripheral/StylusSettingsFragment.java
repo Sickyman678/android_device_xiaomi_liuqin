@@ -47,7 +47,7 @@ public class StylusSettingsFragment extends PreferenceFragment implements
         mStylusPreference = PreferenceManager.getDefaultSharedPreferences(getContext());
         SwitchPreference switchPreference = (SwitchPreference) findPreference(STYLUS_KEY);
 
-        switchPreference.setChecked(mStylusPreference.getBoolean(STYLUS_KEY, false));
+        switchPreference.setChecked(mStylusPreference.getBoolean(STYLUS_KEY, true));
         switchPreference.setEnabled(true);
     }
 
