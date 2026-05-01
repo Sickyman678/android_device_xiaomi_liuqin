@@ -66,6 +66,20 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     IFAAService
 
+# Strip the lineage health AIDL HAL service pulled in by
+# sm8450-common/common.mk:245. That Makefile installs
+# vendor.lineage.health-service.default (which plants a VINTF manifest fragment
+# declaring vendor.lineage.health.IChargingControl/default) but does NOT
+# configure any charging_control_* sysfs paths via soong_config_set, so the
+# service binary fails its path checks and never registers.
+# ChargingControlController.java then calls
+# ServiceManager.waitForDeclaredService("vendor.lineage.health.IChargingControl/default"),
+# which blocks forever because the interface is declared but unregistered.
+# Watchdog kills system_server after ~60s and the boot animation loops.
+# Liuqin has no Xiaomi vendor sysfs charging-control nodes either, so dropping
+# the package is the correct fix.
+PRODUCT_PACKAGES := $(filter-out vendor.lineage.health-service.default,$(PRODUCT_PACKAGES))
+
 # Overlays
 PRODUCT_PACKAGES += \
     LiuqinFrameworks \

@@ -119,6 +119,37 @@ blob_fixups: blob_fixups_user_type = {
             'vendor.qti.hardware.display.config-V2-ndk_platform.so',
             'vendor.qti.hardware.display.config-V2-ndk.so'
         ),
+    # Camera HAL ABI fixups (mirrors mondrian/extract-files.py).
+    # Without these the QC camx provider stack links against AOSP's
+    # libtinyxml2.so whose C++ ABI does not match what the vendor blobs were
+    # compiled against, so internal vtables / member offsets shift and the
+    # provider service crashes on its first HIDL call (notifyDeviceStateChange
+    # reads mModule==NULL inside CameraModule helper). Forcing the rebound
+    # libtinyxml2-v34.so (already shipped in /vendor/lib64) restores the
+    # original ABI.
+    (
+        'vendor/bin/hw/vendor.qti.camera.provider@2.7-service_64',
+        'vendor/lib64/camx.device@3.4-ext-impl.so',
+        'vendor/lib64/camx.device@3.5-ext-impl.so',
+        'vendor/lib64/camx.device@3.6-ext-impl.so',
+        'vendor/lib64/camx.provider@2.4-external.so',
+        'vendor/lib64/camx.provider@2.4-impl.so',
+        'vendor/lib64/camx.provider@2.4-legacy.so',
+        'vendor/lib64/camx.provider@2.5-external.so',
+        'vendor/lib64/camx.provider@2.5-legacy.so',
+        'vendor/lib64/camx.provider@2.6-legacy.so',
+        'vendor/lib64/camx.provider@2.7-legacy.so',
+        'vendor/lib64/com.qti.feature2.anchorsync.so',
+    ): blob_fixup().replace_needed('libtinyxml2.so', 'libtinyxml2-v34.so'),
+    # Vendor blobs that call setpriority/cgroup helpers expect the LineageOS
+    # libprocessgroup compatibility shim; without it, dlopen of these libraries
+    # silently returns NULL on Android 16 because the Soong-built
+    # libprocessgroup no longer exports the legacy symbols.
+    (
+        'vendor/lib64/hw/com.qti.chi.override.so',
+        'vendor/lib64/libcamxcommonutils.so',
+        'vendor/lib64/libmialgoengine.so',
+    ): blob_fixup().add_needed('libprocessgroup_shim.so'),
     (
         'vendor/lib64/hw/vendor.xiaomi.sensor.citsensorservice@2.0-impl.so',
     ): blob_fixup()
@@ -134,7 +165,17 @@ module = ExtractUtilsModule(
     blob_fixups=blob_fixups,
     lib_fixups=lib_fixups,
     namespace_imports=namespace_imports,
-    check_elf=False,
+    # check_elf=True (default) tells extract-utils to read each blob's
+    # DT_NEEDED and emit cc_prebuilt_library_shared modules with the
+    # appropriate shared_libs in the generated vendor Android.bp. Without
+    # this every blob is just a raw PRODUCT_COPY_FILES entry, so Soong has
+    # no idea about the dep chain and never installs vendor variants of
+    # libqti_vndfwk_detect / libexif / etc, which makes
+    # camera.qcom.so dlopen fail at runtime (-EINVAL from hw_get_module)
+    # and the whole camera HAL crashes with a NULL mCameraModule on the
+    # first notifyDeviceStateChange call.
+    # The "check_elf=False is deprecated and will be removed in Android 16"
+    # warning is exactly this — it has now bitten us.
 )
 
 if __name__ == '__main__':
