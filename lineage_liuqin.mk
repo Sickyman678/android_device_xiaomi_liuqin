@@ -21,8 +21,7 @@ PRODUCT_BRAND := Xiaomi
 PRODUCT_MODEL := liuqin
 
 PRODUCT_CHARACTERISTICS := tablet
-# Exclude webview to avoid issues with corrupted prebuilt/missing source
-PRODUCT_PACKAGES_EXCLUDE += webview
+
 
 BUILD_FINGERPRINT := "Xiaomi/liuqin/liuqin:13/TKQ1.221114.001/V14.0.5.0.TMBMIXM:user/release-keys" \
 
