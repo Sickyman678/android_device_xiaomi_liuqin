@@ -4,6 +4,22 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
+# Fstab: liuqin builds its read-only partitions (system/system_ext/product/
+# vendor/vendor_dlkm/odm) as EROFS (see BoardConfig.mk). sm8450-common installs
+# an ext4-only fstab.qcom by default; mounting EROFS images with it fails in
+# first_stage_mount (EINVAL) and the device reboots to the bootloader at ~14s.
+# liuqin/init/fstab.qcom carries dual ext4+erofs entries (fs_mgr tries each in
+# order). This must be set BEFORE inheriting common.mk, which picks it up via
+# `TARGET_DEVICE_FSTAB ?= <common ext4 fstab>`.
+TARGET_DEVICE_FSTAB := $(LOCAL_PATH)/init/fstab.qcom
+
+# WiFi-only tablet: no modem/SIM. Build without the telephony stack so the
+# persistent com.android.phone (TeleService) doesn't crash-loop against an
+# absent RIL (constant CPU wakeups / battery drain) and Settings doesn't show
+# phantom SIM options. Consumed by common.mk's TARGET_HAS_NO_TELEPHONY guard;
+# must be set BEFORE inheriting it.
+TARGET_HAS_NO_TELEPHONY := true
+
 # Inherit from xiaomi sm8450-common
 $(call inherit-product, device/xiaomi/sm8450-common/common.mk)
 
@@ -50,9 +66,10 @@ PRODUCT_COPY_FILES += \
 # PRODUCT_PACKAGES += \
 #     XiaomiDolby
 
-# Init scripts (liuqin-specific). init.target.rc, fstab.qcom and
-# ueventd.xiaomi.rc are dropped because sm8450-common already installs
-# its own at the same paths.
+# Init scripts (liuqin-specific). init.target.rc and ueventd.xiaomi.rc are
+# dropped because sm8450-common already installs its own at the same paths.
+# (fstab.qcom is overridden to liuqin's EROFS variant via TARGET_DEVICE_FSTAB,
+# set at the top of this file before the sm8450-common inherit.)
 PRODUCT_PACKAGES += \
     init.mi_perf.rc \
     init.mi_service.rc

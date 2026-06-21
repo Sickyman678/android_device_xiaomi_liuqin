@@ -8,4 +8,12 @@
     
     <!-- Set default screen rotation to 90 degrees, 1 refers to value of android.view.Surface.ROTATION_90 -->
     <integer name="def_user_rotation">1</integer>
+
+    <!-- Show the on-screen keyboard even when a hardware keyboard is connected.
+         liuqin's keyboard-folio pogo connector registers a phantom alphabetic
+         input device ("Xiaomi Keyboard", vendor 0x15d9/product 0x00a3, virtual
+         bus) that is always present even with no folio attached, so Android
+         otherwise suppresses the soft keyboard's keys (only the toolbar strip
+         renders). Defaulting this true keeps the on-screen keyboard usable. -->
+    <bool name="def_show_ime_with_hard_keyboard">true</bool>
 </resources>

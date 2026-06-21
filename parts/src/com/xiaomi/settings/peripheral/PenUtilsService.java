@@ -77,13 +77,15 @@ public class PenUtilsService extends Service {
         // genuine Xiaomi pens; third-party MPP pens never trigger it anyway.
         // mUEventObserver.startObserving(STYLUS_CHARING_DEVPATH);
         mIsPenCharging = FileUtils.readLineInt(STYLUS_CHARING_PATH) == 1;
-        // Default to forced-on. Third-party MPP pens are passive and do not
-        // register as a connected InputDevice unless they are actively touching
-        // the screen, so the InputDevice-based path in refreshPenMode() would
-        // never activate Pen Mode. Forcing it on out of the box keeps 120Hz +
-        // touch tuning + overlay disable always active; users can still turn
-        // this off from StylusSettingsFragment.
-        mIsPenModeForced = mSharedPrefs.getBoolean(STYLUS_KEY, true);
+        // Default to OFF. Forcing Pen Mode on out of the box pins the display
+        // refresh rate to 120Hz via updateRefreshRateSetting() (min=peak=120),
+        // which caps the panel below its 144Hz max AND blocks it from dropping
+        // to 60/30 to save power - undesirable for the common case of no
+        // stylus attached. Genuine Xiaomi/MPP-active pens still auto-enable Pen
+        // Mode through the InputDevice path in refreshPenMode() when connected;
+        // users with passive third-party pens can force it on from
+        // StylusSettingsFragment.
+        mIsPenModeForced = mSharedPrefs.getBoolean(STYLUS_KEY, false);
         mSurfaceFlinger = ServiceManager.getService(SURFACE_FLINGER_SERVICE_KEY);
         mDefaultMinRate = Settings.System.getFloat(getContentResolver(), KEY_MIN_REFRESH_RATE, 30f);
         mDefaultPeakRate = Settings.System.getFloat(getContentResolver(), KEY_PEAK_REFRESH_RATE, 144f);
