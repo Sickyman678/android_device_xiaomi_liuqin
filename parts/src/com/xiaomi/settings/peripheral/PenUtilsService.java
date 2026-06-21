@@ -39,6 +39,12 @@ public class PenUtilsService extends Service {
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     private static final String STYLUS_KEY = "stylus_switch_key";
+    // The official Xiaomi Smart Pen enumerates as its own input device with this
+    // VID/PID. The built-in Novatek panel digitizer ("NVTCapacitivePen") is
+    // VID=0/PID=0 and is ALWAYS present, so it must be matched by id, not by a
+    // bare SOURCE_STYLUS test (see isDeviceXiaomiPen).
+    private static final int XIAOMI_PEN_VENDOR_ID = 6421;
+    private static final int XIAOMI_PEN_PRODUCT_ID = 19841;
     private static final String STYLUS_CHARING_PATH = "/sys/class/qcom-battery/reverse_chg_mode";
     private static final String STYLUS_CHARING_DEVPATH = "DEVPATH=/devices/platform/soc/soc:qcom,pmic_glink/soc:qcom,pmic_glink:qcom,battery_charger";
 
@@ -174,13 +180,19 @@ public class PenUtilsService extends Service {
     }
 
     private boolean isDeviceXiaomiPen(int id) {
-        // Accept any stylus-capable input device, not only the official
-        // Xiaomi Smart Pen (VID=6421 / PID=19841). Third-party MPP-compatible
-        // pens expose SOURCE_STYLUS and should enable pen mode as well.
+        // Match ONLY the official Xiaomi Smart Pen by VID/PID. Do NOT match on
+        // SOURCE_STYLUS alone: the built-in Novatek panel digitizer
+        // ("NVTCapacitivePen", VID=0/PID=0) is always enumerated with
+        // SOURCE_STYLUS even when no pen is attached, so a bare SOURCE_STYLUS
+        // test force-enables Pen Mode at every boot and pins the refresh rate to
+        // 120Hz (blocking both 144Hz and the drop to 60/30 for power). Passive
+        // third-party pens have no separate input device and can't be
+        // auto-detected; users force Pen Mode for those from
+        // StylusSettingsFragment.
         InputDevice inputDevice = mInputManager.getInputDevice(id);
         if (inputDevice == null) return false;
-        return (inputDevice.getSources() & InputDevice.SOURCE_STYLUS)
-                == InputDevice.SOURCE_STYLUS;
+        return inputDevice.getVendorId() == XIAOMI_PEN_VENDOR_ID
+                && inputDevice.getProductId() == XIAOMI_PEN_PRODUCT_ID;
     }
 
     private InputDeviceListener mInputDeviceListener = new InputDeviceListener() {
@@ -202,7 +214,7 @@ public class PenUtilsService extends Service {
         public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
             if (DEBUG) Log.d(TAG, "onSharedPreferenceChanged: " + key);
             if (key.equals(STYLUS_KEY)) {
-                mIsPenModeForced = prefs.getBoolean(STYLUS_KEY, true);
+                mIsPenModeForced = prefs.getBoolean(STYLUS_KEY, false);
                 refreshPenMode();
             }
         }
