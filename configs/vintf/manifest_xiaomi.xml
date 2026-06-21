@@ -4,6 +4,22 @@
 -->
 <manifest version="1.0" type="device" target-level="6">
     <kernel target-level="6"/>
+    <!--
+        liuqin has no secure-element / eSE hardware. sm8450-common's manifest.xml
+        declares android.hardware.secure_element @1.2 with instances eSE1/SIM1/SIM2.
+        com.android.se (SecureElementService, a persistent process) probes those
+        terminals on startup; with no backing HAL it blocks >20s, ANRs, is killed,
+        and - being persistent - restarts forever (~20s loop: constant wakeups +
+        avc spam). Override with no instances to drop all ISecureElement terminals
+        so the service inits empty and idles. The backing QTI HAL is also removed
+        from PRODUCT_PACKAGES on liuqin (sm8450-common-vendor.mk) so eSE1 is not
+        registered live either.
+    -->
+    <hal format="hidl" override="true">
+        <name>android.hardware.secure_element</name>
+        <transport>hwbinder</transport>
+        <version>1.2</version>
+    </hal>
     <hal format="hidl">
         <name>vendor.xiaomi.hardware.bgservice</name>
         <transport>hwbinder</transport>

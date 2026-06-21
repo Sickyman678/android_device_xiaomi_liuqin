@@ -83,34 +83,14 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     IFAAService
 
-# Strip the lineage health AIDL HAL service pulled in by
-# sm8450-common/common.mk:245. That Makefile installs
-# vendor.lineage.health-service.default (which plants a VINTF manifest fragment
-# declaring vendor.lineage.health.IChargingControl/default) but does NOT
-# configure any charging_control_* sysfs paths via soong_config_set, so the
-# service binary fails its path checks and never registers.
-# ChargingControlController.java then calls
-# ServiceManager.waitForDeclaredService("vendor.lineage.health.IChargingControl/default"),
-# which blocks forever because the interface is declared but unregistered.
-# Watchdog kills system_server after ~60s and the boot animation loops.
-# Liuqin has no Xiaomi vendor sysfs charging-control nodes either, so dropping
-# the package is the correct fix.
-PRODUCT_PACKAGES := $(filter-out vendor.lineage.health-service.default,$(PRODUCT_PACKAGES))
-
-# Drop the sensor-notifier daemon. On liuqin it reads malformed display events
-# from the display-feature device (phone-vs-tablet mismatch) and spins on
-# "unexpected display event header size: 0", pegging a full CPU core and flooding
-# logd nonstop. Verified at runtime (ctl.stop vendor.sensor-notifier) that
-# stopping it drops load from ~2.2 to ~1.0 and ends the log flood with no
-# observable loss of function.
-PRODUCT_PACKAGES := $(filter-out sensor-notifier,$(PRODUCT_PACKAGES))
-
-# Drop the QTI vibrator HAL: liuqin has no vibration motor, but the HAL still
-# advertises vibratorIds=[0] to the framework, so Vibrator.hasVibrator() returns
-# true and Settings shows phantom haptics that do nothing (no /sys/class/leds/
-# vibrator* device exists). Without the HAL, hasVibrator() is false and the UI
-# hides them.
-PRODUCT_PACKAGES := $(filter-out vendor.qti.hardware.vibrator.service,$(PRODUCT_PACKAGES))
+# Package removals (sensor-notifier, QTI vibrator HAL) are done at their source
+# in device/xiaomi/sm8450-common/common.mk, guarded by TARGET_PRODUCT, because
+# Android product config is strictly additive: a $(filter-out ...) here cannot
+# remove a package added by an inherited makefile (inherit-product only splices
+# the inherited PRODUCT_PACKAGES in AFTER this file is fully evaluated, so the
+# filter never sees the package name). The previous filter-out lines here were
+# silent no-ops. vendor.lineage.health-service.default is intentionally left in:
+# the ROM boots fine with it present, so it is not the boot-loop cause.
 
 # Overlays
 PRODUCT_PACKAGES += \
