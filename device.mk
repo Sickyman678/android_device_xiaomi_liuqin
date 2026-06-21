@@ -97,6 +97,21 @@ PRODUCT_PACKAGES += \
 # the package is the correct fix.
 PRODUCT_PACKAGES := $(filter-out vendor.lineage.health-service.default,$(PRODUCT_PACKAGES))
 
+# Drop the sensor-notifier daemon. On liuqin it reads malformed display events
+# from the display-feature device (phone-vs-tablet mismatch) and spins on
+# "unexpected display event header size: 0", pegging a full CPU core and flooding
+# logd nonstop. Verified at runtime (ctl.stop vendor.sensor-notifier) that
+# stopping it drops load from ~2.2 to ~1.0 and ends the log flood with no
+# observable loss of function.
+PRODUCT_PACKAGES := $(filter-out sensor-notifier,$(PRODUCT_PACKAGES))
+
+# Drop the QTI vibrator HAL: liuqin has no vibration motor, but the HAL still
+# advertises vibratorIds=[0] to the framework, so Vibrator.hasVibrator() returns
+# true and Settings shows phantom haptics that do nothing (no /sys/class/leds/
+# vibrator* device exists). Without the HAL, hasVibrator() is false and the UI
+# hides them.
+PRODUCT_PACKAGES := $(filter-out vendor.qti.hardware.vibrator.service,$(PRODUCT_PACKAGES))
+
 # Overlays
 PRODUCT_PACKAGES += \
     LiuqinFrameworks \
