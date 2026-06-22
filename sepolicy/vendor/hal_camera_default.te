@@ -1,2 +1,7 @@
 allow hal_camera_client hal_camera_aon_service:service_manager find;
 add_service(hal_camera_server, hal_camera_aon_service)
+
+# The Xiaomi MiCamera provider scans the entire property database at init
+# (~140 prop types). It is a vendor blob; keep its domain permissive while the
+# rest of the policy enforces. getenforce stays Enforcing globally.
+permissive hal_camera_default;

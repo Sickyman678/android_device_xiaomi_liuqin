@@ -1,0 +1,2 @@
+# servicemanager death/dump callback into usbd
+allow servicemanager usbd:binder call;

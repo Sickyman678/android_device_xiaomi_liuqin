@@ -91,6 +91,12 @@ PRODUCT_PACKAGES += \
 # filter never sees the package name). The previous filter-out lines here were
 # silent no-ops. vendor.lineage.health-service.default is intentionally left in:
 # the ROM boots fine with it present, so it is not the boot-loop cause.
+#
+# SecureElement.apk is AOSP-inherited (base_system.mk), so it is dropped via a
+# phony package with LOCAL_OVERRIDES_PACKAGES (see overrides/Android.mk) — the
+# only device-tree-only way to remove an inherited package.
+PRODUCT_PACKAGES += \
+    liuqin_overrides
 
 # Overlays
 PRODUCT_PACKAGES += \

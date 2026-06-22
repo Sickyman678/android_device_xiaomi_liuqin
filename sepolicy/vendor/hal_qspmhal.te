@@ -1,0 +1,3 @@
+# surfaceflinger/bootanim call the QSPM HAL (perf/thermal hints)
+binder_call(surfaceflinger, vendor_hal_qspmhal_default)
+binder_call(bootanim, vendor_hal_qspmhal_default)

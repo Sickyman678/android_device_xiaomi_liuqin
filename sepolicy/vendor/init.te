@@ -1,0 +1,11 @@
+# Vendor services (citsensorservice, vendor.xiaomi.* HALs) currently start in the
+# init domain (no dedicated domain transition); allow what they need to come up.
+# TODO: label these binaries so they transition to proper domains, then tighten.
+allow init self:qipcrtr_socket { create read write getattr setopt };
+allow init vendor_file:file { execute execute_no_trans };
+allow init same_process_hal_file:file execute;
+binder_call(init, hwservicemanager)
+allow init default_android_hwservice:hwservice_manager { add find };
+allow init hidl_base_hwservice:hwservice_manager add;
+allow init fwk_sensor_hwservice:hwservice_manager find;
+binder_call(init, system_server)

@@ -106,12 +106,12 @@ SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/public
 # PRODUCT_COPY_FILES; allow them to bypass the AOSP ELF-prebuilt check.
 BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
 
-# SELinux: permissive for bring-up. The AOSPA-converted policy is incomplete,
-# so ignore neverallow failures at build time and boot the device permissive.
-# androidboot.selinux=permissive becomes ro.boot.selinux=permissive, which
-# Android init honors on userdebug/eng builds by calling setenforce(0). The
-# prebuilt kernel allows that (CONFIG_SECURITY_SELINUX_DEVELOP=y); it does NOT
-# set CONFIG_SECURITY_SELINUX_BOOTPARAM, so the enforcement is done by init,
-# not by the kernel parsing the cmdline itself.
+# SELinux: ENFORCING (2026-06-22). Device-tree sepolicy now covers the real
+# denials seen on the permissive ROM (see device sepolicy/vendor/*.te); the
+# greedy Xiaomi camera provider is handled by making hal_camera_default a
+# permissive domain while the rest of the policy enforces.
+# androidboot.selinux=permissive is removed so the device boots Enforcing.
+# SELINUX_IGNORE_NEVERALLOWS stays true for now because the AOSPA-converted
+# policy still trips a few neverallows (e.g. init exec'ing vendor_file); drop it
+# once those are properly domained.
 SELINUX_IGNORE_NEVERALLOWS := true
-BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive

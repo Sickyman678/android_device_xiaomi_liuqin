@@ -1,2 +1,6 @@
 allow system_server vendor_hal_fingerprint_hwservice_xiaomi:hwservice_manager { add find };
 get_prop(system_server, vendor_fp_prop)
+
+# InputReader reads HID device country + input wakeup-source name nodes
+# (unlabeled generic sysfs on this kernel)
+allow system_server sysfs:file r_file_perms;

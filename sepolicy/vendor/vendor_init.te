@@ -1,1 +1,7 @@
 set_prop(vendor_init, vendor_fp_prop)
+
+# create the IPA char-dev node
+allow vendor_init vendor_ipa_dev:file { create write open };
+# benign on a wifi-only tablet / inherited init.rc setprop
+dontaudit vendor_init radio_prop:file read;
+dontaudit vendor_init default_prop:property_service set;

@@ -1,0 +1,2 @@
+# sensors HAL reads default_prop at init
+get_prop(hal_sensors_default, default_prop)
