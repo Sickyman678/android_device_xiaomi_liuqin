@@ -27,6 +27,14 @@ $(call inherit-product, device/xiaomi/sm8450-common/common.mk)
 # extract-files.py has run against a stock liuqin firmware dump)
 $(call inherit-product-if-exists, vendor/xiaomi/liuqin/liuqin-vendor.mk)
 
+# Recovery
+# Use the QTI minui DRM backend: atomic multi-plane modeset across the panel's
+# layer mixers (m81 is dual-DSI + dual-DSC, topology <2 2 2>). The generic minui
+# DRM path does a single-plane cold modeset that underruns this panel -> white
+# recovery + RGB-garbage off-mode charging. Backend auto-detects lm count from
+# the SDE connector topology blob. See android_device_xiaomi_pipa change 463649.
+$(call soong_config_set_bool,recovery,target_recovery_uses_qti_drm,true)
+
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH)
