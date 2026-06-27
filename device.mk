@@ -111,7 +111,8 @@ PRODUCT_PACKAGES += \
     LiuqinLauncher3 \
     LiuqinSettings \
     LiuqinSettingsProvider \
-    LiuqinSystemUI
+    LiuqinSystemUI \
+    LiuqinWifi
 
 # Parts
 PRODUCT_PACKAGES += \
