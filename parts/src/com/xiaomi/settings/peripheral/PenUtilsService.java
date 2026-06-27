@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023-2024 Paranoid Android
+ * Copyright (C) 2023-2024 The LineageOS Project
  *
  * SPDX-License-Identifier: Apache-2.0
  */

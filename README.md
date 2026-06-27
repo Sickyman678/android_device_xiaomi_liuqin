@@ -25,7 +25,7 @@ Display | IPS TFT LCD, 1B colors, 144Hz, HDR10, 550 nits (CSOT)
 
 ```
 #
-# Copyright (C) 2023 Paranoid Android
+# Copyright (C) 2023 The LineageOS Project
 #
 # SPDX-License-Identifier: Apache-2.0
 #

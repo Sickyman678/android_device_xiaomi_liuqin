@@ -1,6 +1,5 @@
 #
-# SPDX-FileCopyrightText: 2023 Paranoid Android
-# SPDX-FileCopyrightText: The LineageOS Project
+# SPDX-FileCopyrightText: 2023 The LineageOS Project
 # SPDX-License-Identifier: Apache-2.0
 #
 
@@ -81,10 +80,6 @@ BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE := erofs
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := erofs
 BOARD_VENDOR_DLKMIMAGE_FILE_SYSTEM_TYPE := erofs
 
-# Power feature ext lib: AOSPA-only (vendor.aospa.power HAL).
-# Disabled until ported to LineageOS keyhandler / vendor.lineage.power.
-# TARGET_POWER_FEATURE_EXT_LIB := //$(DEVICE_PATH):libpowerfeature_ext_liuqin
-
 # Properties
 TARGET_ODM_PROP += $(DEVICE_PATH)/configs/properties/odm.prop
 TARGET_PRODUCT_PROP += $(DEVICE_PATH)/configs/properties/product.prop
@@ -111,7 +106,7 @@ BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
 # greedy Xiaomi camera provider is handled by making hal_camera_default a
 # permissive domain while the rest of the policy enforces.
 # androidboot.selinux=permissive is removed so the device boots Enforcing.
-# SELINUX_IGNORE_NEVERALLOWS stays true for now because the AOSPA-converted
-# policy still trips a few neverallows (e.g. init exec'ing vendor_file); drop it
+# SELINUX_IGNORE_NEVERALLOWS stays true for now because the device sepolicy
+# still trips a few neverallows (e.g. init exec'ing vendor_file); drop it
 # once those are properly domained.
 SELINUX_IGNORE_NEVERALLOWS := true

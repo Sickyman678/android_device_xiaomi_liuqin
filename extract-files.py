@@ -36,7 +36,7 @@ def lib_fixup_vendor_suffix(lib: str, partition: str, *args, **kwargs):
 
 lib_fixups: lib_fixups_user_type = {
     **lib_fixups,
-    # All AOSPA's lib_fixup entries removed: every lib in those tuples is
+    # All inherited lib_fixup entries removed: every lib in those tuples is
     # now source-built by LineageOS sm8450-common / hardware/xiaomi /
     # audio-hal/st-hal-ar-legacy, and cc_prebuilt_library_shared cannot
     # use overrides: to replace a source-built install at the same path.

@@ -1,6 +1,5 @@
 //
-// SPDX-FileCopyrightText: 2023 Paranoid Android
-// SPDX-FileCopyrightText: The LineageOS Project
+// SPDX-FileCopyrightText: 2023 The LineageOS Project
 // SPDX-License-Identifier: Apache-2.0
 //
 // Note: init.target.rc, fstab.qcom and ueventd.xiaomi.rc are provided
