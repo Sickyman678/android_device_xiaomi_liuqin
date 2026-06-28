@@ -19,6 +19,11 @@ TARGET_DEVICE_FSTAB := $(LOCAL_PATH)/init/fstab.qcom
 # must be set BEFORE inheriting it.
 TARGET_HAS_NO_TELEPHONY := true
 
+# Mark liuqin as a tablet, matching the official LineageOS pipa (Pad 6) tree
+# and the hiper25 liuqin tree. Set before inheriting common.mk so any tablet
+# guards see it.
+TARGET_IS_TABLET := true
+
 # Register the Dolby DAP effect (uuid 9d4921da-..., backed by libhwdap.so) in
 # the audio effects config so the framework's AudioEffect can find/instantiate
 # it (the XiaomiDolby app attaches it to the global output mix). sm8450-common
