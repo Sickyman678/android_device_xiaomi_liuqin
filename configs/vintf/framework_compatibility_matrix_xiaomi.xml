@@ -8,10 +8,22 @@
         </interface>
     </hal>
     <!--
-        Codec2 dolby/default1 HIDL entries removed in lockstep with
-        manifest_xiaomi.xml: the Dolby and qti.media.c2 prebuilts that
-        publish them depend on libstagefright_foundation-v33.so, which
-        Android 16 no longer ships. AOSP/qcom-caf 'default'+'software'
-        AIDL paths still cover the framework requirement.
+        Dolby Atmos audio: the device manifest declares the Dolby Media
+        Setting HAL (re-enabled for A16 via the libstagefright_foundation-v33
+        compat shim), so it must be listed here too or the target-files VINTF
+        check fails. Optional: the device boots fine without Dolby.
+    -->
+    <hal format="hidl" optional="true">
+        <name>vendor.dolby.hardware.dms</name>
+        <version>2.0</version>
+        <interface>
+            <name>IDms</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <!--
+        Codec2 dolby/default1 HIDL entries stay removed: the Dolby Vision C2
+        and qti.media.c2 prebuilts are a separate, harder A16 port. AOSP/
+        qcom-caf 'default'+'software' AIDL paths cover the codec2 requirement.
     -->
 </compatibility-matrix>

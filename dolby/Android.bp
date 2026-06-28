@@ -1,0 +1,36 @@
+//
+// Copyright (C) 2017-2021 The LineageOS Project
+//           (C) 2023 Paranoid Android
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+
+android_app {
+    name: "XiaomiDolby",
+    certificate: "platform",
+    srcs: ["src/**/*.java"],
+    platform_apis: true,
+    privileged: true,
+    overrides: ["MusicFX"],
+    system_ext_specific: true,
+    static_libs: [
+        "androidx.core_core",
+        "SettingsLib",
+    ],
+}
+
+// VINTF manifest fragment for the Dolby DMS HIDL HAL. The HyperOS firmware
+// ships this at /vendor/etc/vintf/manifest/ but it was never extracted into
+// proprietary-files.txt. An inline declaration in the device base manifest
+// (configs/vintf/manifest_xiaomi.xml) is NOT honored by hwservicemanager at
+// registration time -> the dms-hal-2-0 service crash-loops with "must be in
+// VINTF manifest in order to register/get". Every other registering HIDL HAL
+// on liuqin ships its own per-service fragment here; do the same. Must land on
+// /vendor (soc_specific) so it merges into the device HAL manifest.
+prebuilt_etc_xml {
+    name: "vendor.dolby.hardware.dms@2.0-service.xml",
+    src: "vendor.dolby.hardware.dms@2.0-service.xml",
+    filename_from_src: true,
+    sub_dir: "vintf/manifest",
+    soc_specific: true,
+}

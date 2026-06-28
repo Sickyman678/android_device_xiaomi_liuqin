@@ -1,0 +1,31 @@
+# Dolby Media Setting (DMS) HAL (vendor.dolby.hardware.dms@2.0-service).
+# Backs the Dolby Atmos DAP post-processing audio effect (libhwdap), which the
+# audio HAL process (hal_audio_default) loads, and the XiaomiDolby control app's
+# profile switching.
+type hal_dolby_dms, domain;
+type hal_dolby_dms_exec, exec_type, vendor_file_type, file_type;
+type hal_dolby_dms_hwservice, hwservice_manager_type;
+
+init_daemon_domain(hal_dolby_dms)
+
+# Keep permissive for now: freshly re-enabled vendor HAL on Android 16. Collect
+# denials on-device and tighten later. The build is Enforcing with
+# SELINUX_IGNORE_NEVERALLOWS set, so a permissive domain here is acceptable.
+permissive hal_dolby_dms;
+
+hwbinder_use(hal_dolby_dms)
+add_hwservice(hal_dolby_dms, hal_dolby_dms_hwservice)
+
+# Clients: the dap effect (libhwdap) connects to the DMS HAL from inside the
+# audio HAL process (hal_audio_default) via IDms::getService() -> needs find +
+# binder_call, else DapEffectContext::connectDolbyService() fails and every
+# get/setParameter returns an error (XiaomiDolby then crash-loops on getDsOn).
+# audioserver is kept in case the effect is hosted there on some configs;
+# XiaomiDolby runs as system_app (sharedUserId android.uid.system) and reaches
+# the effect through the AudioEffect framework. (Cross coredomain<->vendor
+# rules; relies on SELINUX_IGNORE_NEVERALLOWS at build time.)
+allow { hal_audio_default audioserver priv_app system_app } hal_dolby_dms_hwservice:hwservice_manager find;
+binder_call(hal_audio_default, hal_dolby_dms)
+binder_call(audioserver, hal_dolby_dms)
+binder_call(priv_app, hal_dolby_dms)
+binder_call(system_app, hal_dolby_dms)

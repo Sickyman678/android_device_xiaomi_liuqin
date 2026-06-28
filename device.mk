@@ -19,6 +19,15 @@ TARGET_DEVICE_FSTAB := $(LOCAL_PATH)/init/fstab.qcom
 # must be set BEFORE inheriting it.
 TARGET_HAS_NO_TELEPHONY := true
 
+# Register the Dolby DAP effect (uuid 9d4921da-..., backed by libhwdap.so) in
+# the audio effects config so the framework's AudioEffect can find/instantiate
+# it (the XiaomiDolby app attaches it to the global output mix). sm8450-common
+# installs its own no-Dolby audio_effects.xml to this same sku_cape path;
+# PRODUCT_COPY_FILES is first-wins for a given destination, so this liuqin copy
+# MUST be listed BEFORE the sm8450-common inherit below to take precedence.
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_cape/audio_effects.xml
+
 # Inherit from xiaomi sm8450-common
 $(call inherit-product, device/xiaomi/sm8450-common/common.mk)
 
@@ -68,10 +77,31 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/displayconfig/display_id_4630947141052476290.xml:$(TARGET_COPY_OUT_VENDOR)/etc/displayconfig/display_id_4630947141052476290.xml \
     $(LOCAL_PATH)/configs/displayconfig/display_id_4630947200012256898.xml:$(TARGET_COPY_OUT_VENDOR)/etc/displayconfig/display_id_4630947200012256898.xml
 
-# Dolby Vision: XiaomiDolby app is a proprietary Xiaomi module that
-# isn't published anywhere; revisit once we extract or rebuild it.
-# PRODUCT_PACKAGES += \
-#     XiaomiDolby
+# Dolby Atmos (DAP audio): the Dolby DAP blobs (libhwdap/libswdap/the DMS HAL)
+# link the API-33 snapshot of libstagefright_foundation; install the LineageOS
+# compat shim so they load on Android 16. It is also pulled in automatically as
+# a shared_libs dep of the Dolby prebuilts, but list it explicitly.
+#
+# The DMS HAL also needs its own VINTF manifest fragment (the firmware ships one
+# but it was never extracted): an inline entry in manifest_xiaomi.xml is not
+# honored by hwservicemanager at registration -> dms-hal-2-0 crash-loops. The
+# fragment module lives in dolby/Android.bp.
+PRODUCT_PACKAGES += \
+    libstagefright_foundation-v33 \
+    vendor.dolby.hardware.dms@2.0-service.xml
+
+# Dolby control app: XiaomiDolby (com.xiaomi.dolby) - the open-source Atmos
+# control app (Settings -> Sound entry + QS tile). Its DolbyAtmos class is an
+# AudioEffect bound to the DAP effect (uuid 9d4921da-...), so toggling it on
+# attaches the dap post-processing effect to the global output mix and restores
+# the chosen profile on every playback/device change (DolbyUtils). Requires the
+# dap effect to be registered in audio_effects.xml (below) and libhwdap.so +
+# the DMS HAL (above). Mirrors the upstream AOSPA bring-up; no MIUI/Dirac deps.
+PRODUCT_PACKAGES += \
+    XiaomiDolby
+
+# Dolby Vision (video) stays disabled: the dolbycodec2 C2 stack is a separate,
+# harder A16 port (see proprietary-files.txt).
 
 # Init scripts (liuqin-specific). init.target.rc and ueventd.xiaomi.rc are
 # dropped because sm8450-common already installs its own at the same paths.

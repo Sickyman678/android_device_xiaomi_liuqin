@@ -39,12 +39,24 @@
         </interface>
     </hal>
     <!--
+        Dolby Atmos audio (DAP): the Dolby Media Setting HAL backs the dap
+        post-processing effect (re-enabled for Android 16 via the
+        libstagefright_foundation-v33 compat shim, hardware/lineage/compat).
+        Its VINTF declaration is intentionally NOT inline here: an inline entry
+        in this base device manifest is not honored by hwservicemanager when the
+        service registers (the dms-hal-2-0 service crash-loops). It is shipped as
+        a per-service fragment instead (dolby/Android.bp ->
+        /vendor/etc/vintf/manifest/vendor.dolby.hardware.dms@2.0-service.xml),
+        matching every other registering HIDL HAL on this device.
+    -->
+    <!--
         Codec2 HIDL declarations (dolby + default1) intentionally removed:
         the Dolby Codec2 prebuilt (dolbycodec2) and the qti.media.c2
         shim that publishes /default1 are both linked against
-        libstagefright_foundation-v33.so, which Android 16 no longer
-        ships. Re-add together with new prebuilts when Dolby support
-        is restored. AOSP's android.hardware.media.c2.IComponentStore/software
-        AIDL instance still works as the codec2 fallback.
+        libstagefright_foundation-v33.so. The compat shim above resolves the
+        link, but the Dolby Vision video stack is a separate, harder port and
+        stays disabled for now. AOSP's
+        android.hardware.media.c2.IComponentStore/software AIDL instance still
+        works as the codec2 fallback.
     -->
 </manifest>

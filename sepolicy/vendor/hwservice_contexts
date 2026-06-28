@@ -1,0 +1,2 @@
+# Dolby Media Setting (DMS) HAL - backs the Atmos DAP audio effect
+vendor.dolby.hardware.dms::IDms u:object_r:hal_dolby_dms_hwservice:s0

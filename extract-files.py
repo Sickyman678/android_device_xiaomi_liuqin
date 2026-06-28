@@ -98,6 +98,17 @@ blob_fixups: blob_fixups_user_type = {
             'libstagefright_foundation.so',
             'libstagefright_foundation-v33.so'
         ),
+    # Dolby Atmos (DAP) audio libs: same A16 ABI gap as the audio HAL above.
+    # The DMS service binary gets -v33 via add_needed; these two link the
+    # unversioned lib, so swap it for the LineageOS compat shim.
+    (
+        'vendor/lib64/soundfx/libhwdap.so',
+        'vendor/lib64/libdlbdsservice.so',
+    ): blob_fixup()
+        .replace_needed(
+            'libstagefright_foundation.so',
+            'libstagefright_foundation-v33.so'
+        ),
     # Rename pre-V8 AIDL '_ndk_platform' -> '_ndk' for blobs that reference
     # old Keymint/Identity/display.config HAL libs.
     (

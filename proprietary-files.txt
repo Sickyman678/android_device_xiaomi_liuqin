@@ -183,9 +183,9 @@ vendor/firmware/cs35l41-dsp1-spk-prot.wmfw|ac5f22fb8397ffa4d2f958d08859d21990ecc
 # Audio (FX Modules)
 vendor/lib64/soundfx/libmisoundfx.so|9f2f62f50bfcee7edb5b051462034f977aac0ca1
 vendor/lib64/soundfx/libshoebox.so|5803ec39c6237cb60093f996056c4790a19eb26a
-# libswdap is the Dolby Atmos soundfx wrapper; it links vendor.dolby.hardware.dms@2.0
-# + libdapparamstorage which were dropped above. Useless without the Dolby HAL.
-# vendor/lib64/soundfx/libswdap.so|7d800a80de5e965983a02570d07324fb5a0eb87c
+# libswdap is the Dolby Atmos soundfx wrapper (re-enabled with the Dolby DAP
+# stack below; see the "Media (Dolby Audio)" section).
+vendor/lib64/soundfx/libswdap.so|7d800a80de5e965983a02570d07324fb5a0eb87c
 
 # Bluetooth
 vendor/lib64/hw/audio.bluetooth_qti.default.so|8f401ff890cf257f128e3de132bba246c8cca80d
@@ -794,22 +794,31 @@ vendor/etc/media_codecs_system_default.xml|323063c1b0807caa8f5122f35b6892d4ef5f8
 vendor/etc/media_profiles.xml|981dd4a7ffb9020aa1142930ff3ae6d07bda12aa
 vendor/etc/media_profiles_V1_0.xml|2da4310e65720a36ee8422228959795f467f102e
 
-# Media (Dolby Audio) - DROPPED for Android 16.
-# The dolbycodec2 service was already disabled (libstagefright_foundation-v33
-# missing). With check_elf=True now active, the Dolby support libraries below
-# also fail link checks against rotted MIUI 14 ABIs. Whole stack removed for
-# basic-boot stability; restore individually if/when needed.
-# vendor/lib64/soundfx/libhwdap.so|c9a022b299c744d832136c9125a9372cb226ee8a
-# vendor/lib64/soundfx/libswgamedap.so|5d20994e801f11c098af4cd646b96574dba40e71
-# vendor/lib64/soundfx/libswvqe.so|0f56d1adfab8ee3961b1af2b55f5d717099b3ef6
-# vendor/lib64/libdapparamstorage.so|738bb86eaf9cf93a10c5a3352a6e6c6572a8566b
+# Media (Dolby Audio / Atmos DAP) - RE-ENABLED 2026-06-27.
+# The A16 ABI gap is resolved via the LineageOS libstagefright_foundation-v33
+# compat shim (hardware/lineage/compat): the DMS service already gets -v33 via
+# the extract-files add_needed fixup, and libhwdap/libdlbdsservice are patched
+# from the unversioned libstagefright_foundation to -v33 (same replace_needed
+# fixup, see extract-files.py). All other NEEDED libs (libcrypto/libxml2/
+# libsqlite) are vendor-available. The Dolby Vision/C2 video stack below stays
+# disabled (separate, harder dolbycodec2 problem).
+vendor/bin/hw/vendor.dolby.hardware.dms@2.0-service
+vendor/etc/init/vendor.dolby.hardware.dms@2.0-service.rc
+vendor/lib64/soundfx/libhwdap.so|c9a022b299c744d832136c9125a9372cb226ee8a
+vendor/lib64/soundfx/libswgamedap.so|5d20994e801f11c098af4cd646b96574dba40e71
+vendor/lib64/soundfx/libswvqe.so|0f56d1adfab8ee3961b1af2b55f5d717099b3ef6
+vendor/lib64/libdapparamstorage.so|738bb86eaf9cf93a10c5a3352a6e6c6572a8566b
+vendor/lib64/libdlbdsservice.so|17d1a228f473a22195e400a0a1c2c16e118bf2d9
+vendor/lib64/vendor.dolby.hardware.dms@2.0-impl.so|48bf9299172f0626a74c5a3c21b7b598c4d2a185
+vendor/lib64/vendor.dolby.hardware.dms@2.0.so|975fee7ab5d90b6e66984d9f67f198c3a4ea358f
+# libdeccfg is a Dolby Vision decoder-config lib; keep disabled with the C2 stack.
 # vendor/lib64/libdeccfg.so|1720f4998f666c1b08fe3116d45ca76d48b0a610
-# vendor/lib64/libdlbdsservice.so|17d1a228f473a22195e400a0a1c2c16e118bf2d9
-# vendor/lib64/vendor.dolby.hardware.dms@2.0-impl.so|48bf9299172f0626a74c5a3c21b7b598c4d2a185
-# vendor/lib64/vendor.dolby.hardware.dms@2.0.so|975fee7ab5d90b6e66984d9f67f198c3a4ea358f
+
+# dax-default.xml is the Dolby Atmos (DAP) tuning profile - needed for AUDIO,
+# re-enabled with the Dolby Audio stack above.
+vendor/etc/dolby/dax-default.xml|96a18f03309ac0b1b13a7cc5aa106379ef6290b4
 
 # Media (Dolby Vision) - DROPPED for Android 16. Same rationale as Dolby Audio.
-# vendor/etc/dolby/dax-default.xml|96a18f03309ac0b1b13a7cc5aa106379ef6290b4
 # vendor/etc/dolby_vision.cfg|83fca9462b834f259064c8f9e784feabde494d35
 # vendor/lib64/c2.dolby.avc.dec.so|439a00c49d07e4fa2451162f75ad1ec6dc5b1ede
 # vendor/lib64/c2.dolby.avc.sec.dec.so|9dfdde23db39260bcba3a1d417dd07a5b521f411
