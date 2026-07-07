@@ -13,6 +13,13 @@ $(call inherit-product, vendor/lineage/config/common_full_tablet_wifionly.mk)
 # inherit-product-if-exists keeps the build vanilla if it isn't present.
 $(call inherit-product-if-exists, vendor/gapps/arm64/arm64-vendor.mk)
 
+# Lindroid (Linux-on-droid): run GNU/Linux (Ubuntu, etc.) containers with GPU
+# passthrough. Forward-ported from lindroid-21 (A14) to our A16 tree.
+# NOTE: actually starting a container needs a from-source kernel with the
+# namespace/cgroup configs enabled (see vendor/lindroid/README.md and the
+# lindroid_defconfig fragment); the prebuilt kernel lacks USER_NS/PID_NS/etc.
+$(call inherit-product-if-exists, vendor/extra/product.mk)
+
 PRODUCT_NAME := lineage_liuqin
 PRODUCT_DEVICE := liuqin
 PRODUCT_BRAND := Xiaomi

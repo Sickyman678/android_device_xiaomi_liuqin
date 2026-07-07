@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Tracked copy of the Lindroid local_manifest. To use, copy to
+  .repo/local_manifests/lindroid.xml then `repo sync` the four projects.
+  See ROADMAP.md in this dir for the A16 forward-port status.
+-->
+<manifest>
+  <project path="vendor/lindroid"    name="Linux-on-droid/vendor_lindroid" remote="github" revision="lindroid-21" />
+  <project path="vendor/extra"       name="Linux-on-droid/vendor_extra"    remote="github" revision="lindroid-21" />
+  <project path="external/libhybris" name="Linux-on-droid/libhybris"       remote="github" revision="lindroid-21" />
+  <project path="external/lxc"       name="Linux-on-droid/external_lxc"     remote="github" revision="lindroid-21" />
+</manifest>
