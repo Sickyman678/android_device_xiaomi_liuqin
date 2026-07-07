@@ -91,6 +91,10 @@ TARGET_RECOVERY_OVERSCAN_PERCENT := 1
 
 # Screen
 TARGET_SCREEN_DENSITY := 340
+# Panel dimensions (portrait). Required by Evolution X's bootanimation build,
+# which scales the animation from TARGET_SCREEN_WIDTH/HEIGHT.
+TARGET_SCREEN_WIDTH := 1800
+TARGET_SCREEN_HEIGHT := 2880
 
 # Sepolicy (liuqin-specific on top of sm8450-common)
 BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
