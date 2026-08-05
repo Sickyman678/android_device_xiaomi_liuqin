@@ -1,28 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Liuqin local manifest. Pulls the device tree itself plus the
-  TheMuppets blobs for sm8450-common. Everything else (sm8450-common
-  device tree, kernel, kernel modules, devicetrees, hardware/xiaomi)
-  is auto-pulled via lineage.dependencies when you run `breakfast`.
+  Liuqin local manifest for Evolution X (Android 17 / cnb).
+
+  Pulls the device tree plus the liuqin vendor blobs. Everything else
+  (sm8450-common device tree, prebuilt kernel, kernel source, modules,
+  devicetrees, hardware/xiaomi) is auto-pulled from evolution.dependencies
+  when you run `breakfast` -- Evolution X's roomservice reads
+  evolution.dependencies, not lineage.dependencies.
 
   After copying this to .repo/local_manifests/liuqin.xml, run:
 
       breakfast lineage_liuqin
 
   to let roomservice resolve transitive deps, then `repo sync -j8`.
+
+  NOTE: the lineage_ product prefix is intentional and must not be renamed.
+  Evolution X derives LINEAGE_BUILD by stripping "lineage_" from the product
+  name (vendor/lineage/build/envsetup.sh); an evolution_ prefix would leave it
+  empty and break the version string, breakfast/brunch and the device check.
 -->
 <manifest>
-  <remote name="yunyanyou" fetch="https://github.com/yunyanyou/" revision="lineage-23.2" />
-  <remote name="muppets" fetch="https://github.com/TheMuppets/" revision="lineage-23.2" />
+  <remote name="sicky" fetch="https://github.com/Sickyman678/" revision="EvolutionX-A17" />
 
   <!-- Liuqin device tree -->
-  <project name="android_device_xiaomi_liuqin" path="device/xiaomi/liuqin" remote="yunyanyou" />
+  <project name="android_device_xiaomi_liuqin" path="device/xiaomi/liuqin" remote="sicky" />
 
-  <!-- Common Xiaomi sm8450 vendor blobs from TheMuppets (LineageOS official). -->
-  <project name="proprietary_vendor_xiaomi_sm8450-common" path="vendor/xiaomi/sm8450-common" remote="muppets" />
+  <!-- Common Xiaomi sm8450 vendor blobs (fork of TheMuppets, liuqin fixes). -->
+  <project name="proprietary_vendor_xiaomi_sm8450-common" path="vendor/xiaomi/sm8450-common" remote="sicky" />
 
   <!-- Liuqin-specific vendor blobs (touch firmware, panel calibration,
        stylus, Adreno a730 firmware, Dolby Vision codecs, camera tuning).
        Extracted from stock OS3.0.5.0.VMYCNXM (Android 15, CN). -->
-  <project name="proprietary_vendor_xiaomi_liuqin" path="vendor/xiaomi/liuqin" remote="yunyanyou" />
+  <project name="proprietary_vendor_xiaomi_liuqin" path="vendor/xiaomi/liuqin" remote="sicky" />
 </manifest>

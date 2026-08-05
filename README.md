@@ -1,9 +1,27 @@
-Device configuration for Xiaomi Pad 6 Pro (liuqin)
+Evolution X device configuration for Xiaomi Pad 6 Pro (liuqin)
 =========================================
 
 The Xiaomi Pad 6 Pro is a flagship tablet from Xiaomi.
 
 It was released in April 2023.
+
+## Build
+
+This tree targets **Evolution X 17.0** on Android 17 (`cp2a` release config, SDK 37):
+
+```
+repo init -u https://github.com/Evolution-X/manifest -b cnb
+# copy local_manifest.xml to .repo/local_manifests/liuqin.xml
+breakfast lineage_liuqin
+repo sync -j8
+mka bacon
+```
+
+The `lineage_` product prefix and the `vendor/lineage` path are Evolution X's
+own build-system naming -- `vendor/lineage` is where the `vendor_evolution`
+repo is mounted, and the `vendor.lineage.*` HALs are interfaces Evolution X
+ships. None of them are renameable: Evolution X's own device trees use the
+same convention.
 
 ## Device specifications
 

@@ -3,25 +3,25 @@
     "repository": "Sickyman678/android_device_xiaomi_sm8450-common",
     "target_path": "device/xiaomi/sm8450-common",
     "remote": "github-non-los",
-    "branch": "evox-a16"
+    "branch": "EvolutionX-A17"
   },
   {
     "repository": "Sickyman678/android_device_xiaomi_liuqin-kernel",
     "target_path": "device/xiaomi/liuqin-kernel",
     "remote": "github-non-los",
-    "branch": "evox-a16"
+    "branch": "EvolutionX-A17"
   },
   {
     "repository": "Sickyman678/proprietary_vendor_xiaomi_sm8450-common",
     "target_path": "vendor/xiaomi/sm8450-common",
     "remote": "github-non-los",
-    "branch": "evox-a16"
+    "branch": "EvolutionX-A17"
   },
   {
     "repository": "Sickyman678/proprietary_vendor_xiaomi_liuqin",
     "target_path": "vendor/xiaomi/liuqin",
     "remote": "github-non-los",
-    "branch": "evox-a16"
+    "branch": "EvolutionX-A17"
   },
   {
     "repository": "LineageOS/android_hardware_xiaomi",
@@ -45,6 +45,6 @@
     "repository": "Sickyman678/android_kernel_xiaomi_sm8450-modules",
     "target_path": "kernel/xiaomi/sm8450-modules",
     "remote": "github-non-los",
-    "branch": "evox-a16"
+    "branch": "EvolutionX-A17"
   }
 ]
