@@ -5,7 +5,7 @@
   Pulls the device tree plus the liuqin vendor blobs. Everything else
   (sm8450-common device tree, prebuilt kernel, kernel source, modules,
   devicetrees, hardware/xiaomi) is auto-pulled from evolution.dependencies
-  when you run `breakfast` -- Evolution X's roomservice reads
+  when you run `breakfast` — Evolution X's roomservice reads
   evolution.dependencies, not lineage.dependencies.
 
   After copying this to .repo/local_manifests/liuqin.xml, run:
