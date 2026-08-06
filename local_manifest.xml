@@ -32,4 +32,12 @@
        stylus, Adreno a730 firmware, Dolby Vision codecs, camera tuning).
        Extracted from stock OS3.0.5.0.VMYCNXM (Android 15, CN). -->
   <project name="proprietary_vendor_xiaomi_liuqin" path="vendor/xiaomi/liuqin" remote="sicky" />
+
+  <!-- EvoX vendor fork: carries the fix making ro.setupwizard.rotation_locked
+       an optional prop, so device.mk below can override it to false. Upstream
+       hardcodes it to true via a conditional on PRODUCT_CHARACTERISTICS that
+       can never match, which collides with our tablet setting and aborts the
+       build on a duplicate sysprop assignment. -->
+  <remove-project name="vendor_pixel-style" />
+  <project name="vendor_pixel-style" path="vendor/pixel-style" remote="sicky" />
 </manifest>
