@@ -40,4 +40,12 @@
        build on a duplicate sysprop assignment. -->
   <remove-project name="vendor_pixel-style" />
   <project name="vendor_pixel-style" path="vendor/pixel-style" remote="sicky" />
+
+  <!-- GApps fork: resyncs LOCAL_[OPTIONAL_]USES_LIBRARIES with the shipped
+       APKs. Upstream's lists had drifted from the APK manifests, which fails
+       dexpreopt's manifest_check.py with "mismatch or misordering in the
+       <uses-library> tags". LFS blobs still resolve via the committed
+       .lfsconfig, which points at Evolution X's own LFS server. -->
+  <remove-project name="vendor_gms" />
+  <project name="vendor_gms" path="vendor/gms" remote="sicky" clone-depth="1" />
 </manifest>
