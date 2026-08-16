@@ -10,3 +10,8 @@
 
 # Dolby Media Setting (DMS) HAL - Atmos DAP audio
 /vendor/bin/hw/vendor\.dolby\.hardware\.dms@2\.0-service u:object_r:hal_dolby_dms_exec:s0
+
+# DAP profile/tuning database (dax_sqlite3.db). Labelling this out of the
+# generic vendor_data_file lets hal_dolby_dms run enforcing without handing it
+# access to every other /data/vendor subdirectory.
+/data/vendor/dolby(/.*)? u:object_r:dolby_vendor_data_file:s0

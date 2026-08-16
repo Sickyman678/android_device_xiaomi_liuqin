@@ -6,12 +6,17 @@ type hal_dolby_dms, domain;
 type hal_dolby_dms_exec, exec_type, vendor_file_type, file_type;
 type hal_dolby_dms_hwservice, hwservice_manager_type;
 
+# DAP profile/tuning database (dax_sqlite3.db) lives under /data/vendor/dolby.
+# Give it a dedicated type rather than leaving it as generic vendor_data_file,
+# so the HAL does not need blanket access to every other vendor data dir.
+type dolby_vendor_data_file, file_type, data_file_type;
+
 init_daemon_domain(hal_dolby_dms)
 
-# Keep permissive for now: freshly re-enabled vendor HAL on Android 16. Collect
-# denials on-device and tighten later. The build is Enforcing with
-# SELINUX_IGNORE_NEVERALLOWS set, so a permissive domain here is acceptable.
-permissive hal_dolby_dms;
+# Previously permissive while denials were collected on-device. The full set
+# observed on the 2026-08-16 build was: binder call -> hal_audio_default, and
+# getattr/lock on /data/vendor/dolby/dax_sqlite3.db. All are granted below, so
+# the domain now runs enforcing like every other HAL on this device.
 
 hwbinder_use(hal_dolby_dms)
 add_hwservice(hal_dolby_dms, hal_dolby_dms_hwservice)
@@ -29,3 +34,19 @@ binder_call(hal_audio_default, hal_dolby_dms)
 binder_call(audioserver, hal_dolby_dms)
 binder_call(priv_app, hal_dolby_dms)
 binder_call(system_app, hal_dolby_dms)
+
+# Callback direction. binder_call(A, B) grants A->B call plus B->A transfer, but
+# NOT B->A call, and DolbyManagerService calls back into the audio HAL to push
+# DAP endpoint/profile changes. Without this the call is denied and the profile
+# switch silently no-ops:
+#   avc: denied { call } scontext=hal_dolby_dms tcontext=hal_audio_default
+binder_call(hal_dolby_dms, hal_audio_default)
+
+# DAP database under /data/vendor/dolby. The HAL creates the directory on first
+# boot, then opens dax_sqlite3.db and takes an fcntl lock on it, so it needs
+# create_dir_perms on its own dir and create_file_perms (which covers getattr
+# and lock) on the contents. The search/write/add_name on the vendor_data_file
+# parent is what lets it create /data/vendor/dolby in the first place.
+allow hal_dolby_dms vendor_data_file:dir { search write add_name };
+allow hal_dolby_dms dolby_vendor_data_file:dir create_dir_perms;
+allow hal_dolby_dms dolby_vendor_data_file:file create_file_perms;
