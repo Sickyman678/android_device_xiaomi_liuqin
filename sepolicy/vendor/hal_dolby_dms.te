@@ -21,6 +21,19 @@ init_daemon_domain(hal_dolby_dms)
 hwbinder_use(hal_dolby_dms)
 add_hwservice(hal_dolby_dms, hal_dolby_dms_hwservice)
 
+# Startup property access. The HIDL runtime polls hwservicemanager.ready before
+# it will register IDms; without read on hwservicemanager_prop the HAL spins in
+# "Waited for hwservicemanager.ready for a second, waiting another..." forever
+# and never registers, so the DAP effect never loads. Permissive was silently
+# allowing this - it only became visible once the domain went enforcing, and it
+# fires *before* registration, which is why the earlier on-device denial capture
+# (taken after the HAL had already registered under permissive) never showed it.
+get_prop(hal_dolby_dms, hwservicemanager_prop)
+
+# The HAL also reads and sets a vendor audio property (dolby endpoint state).
+# set_prop covers the read, the write, and the property_service socket connect.
+set_prop(hal_dolby_dms, vendor_audio_prop)
+
 # Clients: the dap effect (libhwdap) connects to the DMS HAL from inside the
 # audio HAL process (hal_audio_default) via IDms::getService() -> needs find +
 # binder_call, else DapEffectContext::connectDolbyService() fails and every
